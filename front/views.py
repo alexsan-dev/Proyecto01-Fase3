@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.template.response import TemplateResponse
 
 # Create your views here.
 
 
 def index(request):
-    return HttpResponse("Hello, world")
+    response = TemplateResponse(request, 'index.html', {})
+    return response
