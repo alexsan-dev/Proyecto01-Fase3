@@ -1,0 +1,80 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <body>
+    <form>
+      <h2>Iniciar sesión</h2>
+      <p>Si ya tienes una cuenta en la banca en línea puedes iniciar aquí.</p>
+      <div class="inputRow">
+        <input
+          type="email"
+          id="email"
+          autocomplete="off"
+          placeholder="name@domain.com"
+          oninvalid="this.setCustomValidity('Ingresa un correo valido')"
+          oninput="this.setCustomValidity('')"
+          required
+        />
+        <label for="email">Correo electrónico</label>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-mail"
+        >
+          <path
+            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+          ></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </div>
+      <div class="inputRow">
+        <input
+          type="password"
+          id="password"
+          autocomplete="off"
+          placeholder="Contraseña segura"
+          oninvalid="this.setCustomValidity('La contraseña es obligatoria')"
+          oninput="this.setCustomValidity('')"
+          onfocus="this.type='text'"
+          onblur="this.type='password'"
+          required
+        />
+        <label for="birth">Contraseña</label>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-lock"
+        >
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <div id="actions">
+        <a class="button outline" href="{% url 'signing' %}" title="Registrarse"
+          >Registrarse</a
+        >
+        <button>Iniciar sesión</button>
+      </div>
+    </form>
+  </body>
+</html>
