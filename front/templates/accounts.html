@@ -1,0 +1,110 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuentas | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <div class="title">
+        <h1>Información de cuentas</h1>
+        <p>
+          Aquí se mostrara la información básica de todas tus cuentas asociadas
+          a tu usuario.
+          <button class="outline">
+            {% include "icons/plus.svg" %} Asociar Cuenta de terceros
+          </button>
+        </p>
+      </div>
+      <div class="container">
+        <!-- CUENTAS MONETARIAS -->
+        <div class="accounts">
+          <div class="account_container">
+            <h2>Cuentas <strong>Monetarias:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>No. Cuenta</strong>
+                <strong>Nombre</strong>
+                <strong>Crédito</strong>
+                <strong>Estado</strong>
+                <strong>Acciones</strong>
+              </li>
+              <li>
+                <p><strong>000001</strong></p>
+                <p>Alex Santos</p>
+                <p>999.24</p>
+                <p><strong>Activa</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000002</strong></p>
+                <p>Daniel Valenzuela</p>
+                <p>Q5,522.24</p>
+                <p><strong>Suspendida</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000003</strong></p>
+                <p>Alex Santos</p>
+                <p>Q999.24</p>
+                <p><strong>Activa</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="account_container">
+            <h2>Cuentas de <strong>Ahorro:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>No. Cuenta</strong>
+                <strong>Nombre</strong>
+                <strong>Crédito</strong>
+                <strong>Estado</strong>
+                <strong>Acciones</strong>
+              </li>
+              <li>
+                <p><strong>000001</strong></p>
+                <p>Alex Santos</p>
+                <p>999.24</p>
+                <p><strong>Activa</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000002</strong></p>
+                <p>Daniel Valenzuela</p>
+                <p>Q5,522.24</p>
+                <p><strong>Suspendida</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000003</strong></p>
+                <p>Alex Santos</p>
+                <p>Q999.24</p>
+                <p><strong>Activa</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <img
+          src="{% static 'images/accounts.svg' %}"
+          alt="Accounts Illustration"
+        />
+      </div>
+    </main>
+  </body>
+</html>

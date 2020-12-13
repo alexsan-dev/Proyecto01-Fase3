@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <form>
+    <form action="{% url 'admin' %}">
       <h2>Iniciar sesión</h2>
       <p>Si ya tienes una cuenta en la banca en línea puedes iniciar aquí.</p>
       <div class="inputRow">
@@ -38,7 +38,7 @@
           onblur="this.type='password'"
           required
         />
-        <label for="birth">Contraseña</label>
+        <label for="password">Contraseña</label>
         {% include "icons/lock.svg" %}
       </div>
       <div id="actions">

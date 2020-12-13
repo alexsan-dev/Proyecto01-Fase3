@@ -9,6 +9,16 @@ body {
   padding: 30px;
 }
 
+@keyframes formEntry {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 form {
   background: #fff;
   width: 100%;
@@ -19,6 +29,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  animation: formEntry 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1;
 }
 
 form > .inputGrid {
@@ -26,7 +37,7 @@ form > .inputGrid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, calc(50% - 10px));
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   column-gap: 20px;
 }
 
@@ -41,30 +52,23 @@ form > p {
 
 form > #actions {
   position: relative;
-  width: 300px;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
 }
 
-form > #actions::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -210px;
-  width: 200px;
-  height: 2px;
-  background-color: #bbb;
-}
-
 form > #actions > button,
 form > #actions > .button {
-  width: 50%;
+  width: 33.33%;
   padding: 10px 0px;
 }
 
 form > #actions > a:first-child {
   margin-right: 10px;
   --color: #777;
+}
+
+form > #actions > a:nth-child(2) {
+  margin-right: 10px;
 }

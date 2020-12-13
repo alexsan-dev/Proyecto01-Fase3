@@ -9,6 +9,16 @@ body {
   padding: 30px;
 }
 
+@keyframes formEntry {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 form {
   background: #fff;
   width: 100%;
@@ -16,6 +26,7 @@ form {
   padding: 40px 30px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: formEntry 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1;
 }
 
 form > h2 {

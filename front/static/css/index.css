@@ -34,7 +34,9 @@
 }
 
 body {
+  --darkBlue: hsl(207, 90%, 20%);
   --blue: #2196f3;
+  --amber: #ffc107;
   --red: #e91e63;
   background-color: #f5f5f5;
   animation: entry 0.3s linear 1;
@@ -44,6 +46,10 @@ body {
 h2,
 p {
   color: #333;
+}
+
+ul {
+  list-style: none;
 }
 
 button,
@@ -64,6 +70,13 @@ button,
   font-size: 0.8em;
   text-decoration: none;
   text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+button > svg,
+.button > svg {
+  margin-right: 5px;
 }
 
 button.outline,
@@ -118,7 +131,8 @@ button.outline:focus,
   color: #888;
 }
 
-.inputRow > input {
+.inputRow > input,
+.inputRow > select {
   border-radius: 8px;
   width: 100%;
   height: 100%;
@@ -131,38 +145,47 @@ button.outline:focus,
   transition: border-color 0.2s ease-in-out;
 }
 
-.inputRow > input:hover {
+.inputRow > input:hover,
+.inputRow > select:hover {
   border-color: #777;
 }
 
-.inputRow > input:hover ~ label {
+.inputRow > input:hover ~ label,
+.inputRow > select:hover ~ label {
   color: #777;
 }
 
-.inputRow > input:hover ~ svg {
+.inputRow > input:hover ~ svg,
+.inputRow > select:hover ~ svg {
   stroke: #777;
 }
 
-.inputRow > input:focus {
+.inputRow > input:focus,
+.inputRow > select:focus {
   border-color: var(--blue);
 }
 
-.inputRow > input:focus ~ label {
+.inputRow > input:focus ~ label,
+.inputRow > select:focus ~ label {
   color: var(--blue);
 }
 
-.inputRow > input:focus ~ svg {
+.inputRow > input:focus ~ svg,
+.inputRow > select:focus ~ svg {
   stroke: var(--blue);
 }
 
-.inputRow > input:not(:placeholder-shown):invalid {
+.inputRow > input:not(:placeholder-shown):invalid,
+.inputRow > select:not(:placeholder-shown):invalid {
   border-color: var(--red);
 }
 
-.inputRow > input:not(:placeholder-shown):invalid ~ label {
+.inputRow > input:not(:placeholder-shown):invalid ~ label,
+.inputRow > select:not(:placeholder-shown):invalid ~ label {
   color: var(--red);
 }
-.inputRow > input:not(:placeholder-shown):invalid ~ svg {
+.inputRow > input:not(:placeholder-shown):invalid ~ svg,
+.inputRow > select:not(:placeholder-shown):invalid ~ svg {
   stroke: var(--red);
 }
 

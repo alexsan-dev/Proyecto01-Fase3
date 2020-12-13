@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrarse | Banca Virtual</title>
+    <title>Registrar empresa | Banca Virtual</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
     <link
@@ -19,70 +19,63 @@
   </head>
   <body>
     <form action="{% url 'admin' %}">
-      <h2>Crear usuario</h2>
+      <h2>Crear usuario empresarial</h2>
       <p>
         Llena el siguiente formulario para registrarte en la banca en linea.
       </p>
       <div class="inputGrid">
         <div class="inputRow">
-          <input
-            type="text"
-            id="cui"
-            autocomplete="off"
-            placeholder="3773328520115"
-            maxlength="13"
-            minlength="13"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un CUI valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
-          <label for="cui">Número de CUI o DPI</label>
-          {% include "icons/credit-card.svg" %}
-        </div>
-        <div class="inputRow">
-          <input
-            type="text"
-            id="nit"
-            autocomplete="off"
-            placeholder="123456"
-            minlength="5"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un NIT valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
-          <label for="nit">Número de NIT</label>
-          {% include "icons/hash.svg" %}
+          <select id="cui" autocomplete="off" required>
+            <option selected disabled>Seleccionar tipo</option>
+            <option>Sociedad anónima</option>
+            <option>Compañía limitada</option>
+            <option>Empresa individual</option>
+          </select>
+
+          <label for="email">Tipo de empresa</label>
+          {% include "icons/briefcase.svg" %}
         </div>
         <div class="inputRow">
           <input
             type="text"
             id="name"
             autocomplete="off"
-            placeholder="Nuevo usuario"
+            placeholder="Nueva empresa"
             minlength="3"
             oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
             oninput="this.setCustomValidity('')"
             required
           />
-          <label for="name">Nombre completo</label>
-          {% include "icons/user.svg" %}
+          <label for="name">Nombre de la empresa</label>
+          {% include "icons/users.svg" %}
         </div>
         <div class="inputRow">
           <input
-            type="date"
-            id="birth"
+            type="text"
+            id="comercial"
             autocomplete="off"
-            placeholder="dd-mm-yyyy"
-            value="2020-12-05"
-            pattern="\d{1,2}/\d{1,2}/\d{4}"
-            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
+            placeholder="MiEmpresa"
+            minlength="3"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
             oninput="this.setCustomValidity('')"
             required
           />
-          <label for="birth">Fecha de nacimiento</label>
-          {% include "icons/calendar.svg" %}
+          <label for="comercial">Nombre comercial</label>
+          {% include "icons/user-plus.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="text"
+            id="agent"
+            autocomplete="off"
+            placeholder="Nombre completo"
+            minlength="3"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="agent">Representante legal</label>
+          {% include "icons/file.svg" %}
         </div>
         <div class="inputRow">
           <input
@@ -151,9 +144,9 @@
         >
         <a
           class="button outline"
-          href="{% url 'business_signing' %}"
+          href="{% url 'signing' %}"
           title="Registrar empresa"
-          >Registrar empresa</a
+          >Registrar usuario</a
         >
         <button>Registrarse</button>
       </div>
