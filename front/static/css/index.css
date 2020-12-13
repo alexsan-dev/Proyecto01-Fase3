@@ -127,7 +127,7 @@ button.outline:focus,
   font-weight: 500;
   font-size: 1em;
   border: 2px solid #bbb;
-  padding: 0 10px 0 2.9rem;
+  padding: 0 10px 0 2.9em;
   transition: border-color 0.2s ease-in-out;
 }
 
