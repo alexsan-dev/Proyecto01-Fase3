@@ -37,7 +37,7 @@ body {
   --blue: #2196f3;
   --red: #e91e63;
   background-color: #f5f5f5;
-  animation: entry 0.3s ease-in-out 1;
+  animation: entry 0.3s linear 1;
   font-size: 17px;
 }
 

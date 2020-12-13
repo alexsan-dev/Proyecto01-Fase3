@@ -23,66 +23,102 @@
       <p>
         Llena el siguiente formulario para registrarte en la banca en linea.
       </p>
-      <div class="inputRow">
-        <input
-          type="email"
-          id="email"
-          autocomplete="off"
-          placeholder="name@domain.com"
-          oninvalid="this.setCustomValidity('Ingresa un correo valido')"
-          oninput="this.setCustomValidity('')"
-          required
-        />
-        <label for="email">Correo electrónico</label>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-mail"
-        >
-          <path
-            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-          ></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
+      <div class="inputGrid">
+        <div class="inputRow">
+          <input
+            type="text"
+            id="cui"
+            autocomplete="off"
+            placeholder="3773328520115"
+            maxlength="13"
+            minlength="13"
+            pattern="\d*"
+            oninvalid="this.setCustomValidity('Ingresa un CUI valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Número de CUI o DPI</label>
+          {% include "icons/credit-card.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="text"
+            id="nit"
+            autocomplete="off"
+            placeholder="123456"
+            minlength="5"
+            pattern="\d*"
+            oninvalid="this.setCustomValidity('Ingresa un NIT valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Número de NIT</label>
+          {% include "icons/hash.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="text"
+            id="name"
+            autocomplete="off"
+            placeholder="Nuevo usuario"
+            minlength="3"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Nombre completo</label>
+          {% include "icons/user.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="date"
+            id="birth"
+            autocomplete="off"
+            placeholder="dd-mm-yyyy"
+            value="2020-12-05"
+            pattern="\d{1,2}/\d{1,2}/\d{4}"
+            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Fecha de nacimiento</label>
+          {% include "icons/calendar.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="email"
+            id="email"
+            autocomplete="off"
+            placeholder="name@domain.com"
+            oninvalid="this.setCustomValidity('Ingresa un correo valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Correo electrónico</label>
+          {% include "icons/mail.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="tel"
+            id="phone"
+            autocomplete="off"
+            placeholder="50235678555"
+            minlength="5"
+            pattern="\d*"
+            oninvalid="this.setCustomValidity('Ingresa un número valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="email">Número de teléfono</label>
+          {% include "icons/phone.svg" %}
+        </div>
       </div>
-      <div class="inputRow">
-        <input
-          type="password"
-          id="password"
-          autocomplete="off"
-          placeholder="Contraseña segura"
-          oninvalid="this.setCustomValidity('La contraseña es obligatoria')"
-          oninput="this.setCustomValidity('')"
-          onfocus="this.type='text'"
-          onblur="this.type='password'"
-          required
-        />
-        <label for="birth">Contraseña</label>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-lock"
-        >
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-      </div>
+
       <div id="actions">
-        <a class="button outline" href="{% url 'login' %}" title="Registrarse"
+        <a
+          class="button outline"
+          href="{% url 'login' %}"
+          title="Iniciar sesión"
           >Iniciar sesión</a
         >
         <button>Registrarse</button>
