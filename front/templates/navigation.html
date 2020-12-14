@@ -28,12 +28,12 @@
           </a>
           <ul>
             <li>
-              <a href="#" id="transactions_self"
+              <a href="{% url 'own_transactions' %}" id="own_transactions"
                 >{% include "icons/user.svg" %} <span>Cuentas propias</span></a
               >
             </li>
             <li>
-              <a href="#" id="accounts"
+              <a href="{% url 'third_transactions' %}" id="third_transactions"
                 >{% include "icons/users.svg" %}
                 <span>Cuentas de terceros</span></a
               >
@@ -41,7 +41,7 @@
           </ul>
         </li>
         <li>
-          <a href="#" id="payments"
+          <a href="{% url 'payments' %}" id="payments"
             >{% include "icons/dollar-sign.svg" %} <span>Pagos</span></a
           >
         </li>

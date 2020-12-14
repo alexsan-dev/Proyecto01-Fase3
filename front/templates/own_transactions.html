@@ -1,0 +1,82 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transacciones con cuentas propias | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/transactions.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <div class="title">
+        <div class="description">
+          <h1>Cuentas propias</h1>
+          <p>
+            Aqui puedes hacer transaferencias en quetzales de una cuenta propia
+            a otra.
+            <button class="outline">
+              {% include "icons/plus.svg" %} Asociar Cuenta propia
+            </button>
+          </p>
+        </div>
+      </div>
+      <form class="container">
+        <div class="account_box">
+          <h2>Cuenta a debitar:</h2>
+          <p>
+            Asegurate de disponer de una cuenta con fondos para la
+            transferencia.
+          </p>
+          <div class="inputRow">
+            <select
+              id="from_account"
+              autocomplete="off"
+              required
+              aria-placeholder="Seleccionar cuenta"
+            >
+              <option hidden selected disabled value="Seleccionar cuenta">
+                Seleccionar cuenta
+              </option>
+              <option>0000001 Alex Santos</option>
+              <option>0000003 Daniel Valenzuela</option>
+              <option>0000004 Alex Santos</option>
+            </select>
+
+            <label for="from_account">Cuenta de origen</label>
+            {% include "icons/user.svg" %}
+          </div>
+        </div>
+
+        <div class="account_box">
+          <h2>Cuenta a acreditar:</h2>
+          <p>Asegurate de no acreditar a la misma cuenta de donde se debita.</p>
+          <div class="inputRow">
+            <select
+              id="to_account"
+              autocomplete="off"
+              required
+              aria-placeholder="Seleccionar cuenta"
+            >
+              <option hidden selected disabled value="Seleccionar cuenta">
+                Seleccionar cuenta
+              </option>
+              <option>0000001 Alex Santos</option>
+              <option>0000003 Daniel Valenzuela</option>
+              <option>0000004 Alex Santos</option>
+            </select>
+
+            <label for="to_account">Cuenta de destino</label>
+            {% include "icons/user.svg" %}
+          </div>
+        </div>
+
+        <img src="{% static 'images/transfer.svg' %}" alt="Transfer" />
+        <button>Transferir</button>
+      </form>
+    </main>
+  </body>
+</html>

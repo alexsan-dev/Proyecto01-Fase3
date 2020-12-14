@@ -24,5 +24,21 @@ def accounts(request):
     return renderTemplate(request, 'accounts')
 
 
+def own_transactions(request):
+    return renderTemplate(request, 'own_transactions')
+
+
+def third_transactions(request):
+    return renderTemplate(request, 'third_transactions')
+
+
+def payments(request):
+    return renderTemplate(request, 'payments')
+
+
+def checks(request):
+    return renderTemplate(request, 'checks')
+
+
 def admin(request):
     return renderTemplate(request, 'admin')

@@ -129,6 +129,7 @@ button.outline:focus,
   padding: 0 10px;
   font-weight: bold;
   color: #888;
+  border-radius: 5px;
 }
 
 .inputRow > input,
