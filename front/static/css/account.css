@@ -23,6 +23,11 @@ main > .container > img {
 
 .inputs_container > .payments_accounts {
   margin-bottom: -30px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  grid-auto-flow: column;
 }
 
 .inputs_container > .payments_services > p,

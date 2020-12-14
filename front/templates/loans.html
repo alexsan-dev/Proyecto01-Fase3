@@ -1,0 +1,172 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prestamos | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <div class="title">
+        <div class="inputs_container">
+          <div class="payments_services">
+            <h2>Solicitud</h2>
+            <p>
+              Llena el siguiente formulario <br />
+              para solicitar un préstamo.
+              <button>
+                {% include "icons/download.svg" %} Solicitar préstamo
+              </button>
+            </p>
+          </div>
+          <div class="payments_accounts">
+            <div class="inputRow">
+              <input
+                type="number"
+                id="amount"
+                autocomplete="off"
+                placeholder="999.99"
+                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="amount">Monto</label>
+              {% include "icons/dollar-sign.svg" %}
+            </div>
+            <div class="inputRow">
+              <select
+                id="loan_plan"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar plan"
+              >
+                <option hidden selected disabled value="Seleccionar plan">
+                  Seleccionar plan
+                </option>
+                <option>Quincenal</option>
+                <option>Mensual</option>
+                <option>Trimestral</option>
+              </select>
+
+              <label for="loan_plan">Tipo de plan</label>
+              {% include "icons/file.svg" %}
+            </div>
+          </div>
+          <div class="payments_services">
+            <h2>Pago</h2>
+            <p>
+              Aquí puedes realizar el pago <br />de todos tus prestamos.
+              <button>
+                {% include "icons/dollar-sign.svg" %} Realizar pago
+              </button>
+            </p>
+          </div>
+          <div class="payments_accounts" style="margin-right: -20px">
+            <div class="inputRow">
+              <select
+                id="from_account"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar cuenta"
+              >
+                <option hidden selected disabled value="Seleccionar cuenta">
+                  Seleccionar cuenta
+                </option>
+                <option>0000001 Alex Santos</option>
+                <option>0000003 Daniel Valenzuela</option>
+                <option>0000004 Alex Santos</option>
+              </select>
+
+              <label for="from_account">Cuenta a debitar</label>
+              {% include "icons/user.svg" %}
+            </div>
+            <div class="inputRow">
+              <input
+                type="number"
+                id="payment_amount"
+                autocomplete="off"
+                placeholder="999.99"
+                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="payment_amount">Monto a pagar</label>
+              {% include "icons/dollar-sign.svg" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <!-- CUENTAS MONETARIAS -->
+        <div class="accounts">
+          <div class="account_container">
+            <h2>Historial de <strong>prestamos:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>Código</strong>
+                <strong>Plan de pago</strong>
+                <strong>Monto</strong>
+                <strong>Estado</strong>
+                <strong>Acciones</strong>
+              </li>
+              <li>
+                <p><strong>234234</strong></p>
+                <p>Quincenal</p>
+                <p>Q4321.22</p>
+                <p><strong>Pagado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>S24132</strong></p>
+                <p>Mensual</p>
+                <p>Q5200.23</p>
+                <p><strong>Pendiente</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>NBS21</strong></p>
+                <p>Trimestral</p>
+                <p>Q9999.24</p>
+                <p><strong>Pagado</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+              <li>
+                <p><strong>234234</strong></p>
+                <p>Quincenal</p>
+                <p>Q4321.22</p>
+                <p><strong>Pagado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>S24132</strong></p>
+                <p>Mensual</p>
+                <p>Q5200.23</p>
+                <p><strong>Pendiente</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>NBS21</strong></p>
+                <p>Trimestral</p>
+                <p>Q9999.24</p>
+                <p><strong>Pagado</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <img src="{% static 'images/loan.svg' %}" alt="Accounts Illustration" />
+      </div>
+    </main>
+  </body>
+</html>

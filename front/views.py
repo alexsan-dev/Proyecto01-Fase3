@@ -40,5 +40,9 @@ def checks(request):
     return renderTemplate(request, 'checks')
 
 
+def loans(request):
+    return renderTemplate(request, 'loans')
+
+
 def admin(request):
     return renderTemplate(request, 'admin')

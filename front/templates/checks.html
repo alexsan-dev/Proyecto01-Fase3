@@ -13,31 +13,18 @@
     {% include "navigation.html" %}
     <main>
       <div class="title">
-        <div class="description">
-          <h1>Información de cheques</h1>
-          <p>
-            Aquí se mostrara la información sobre <br />todos tus cheques de
-            cada cuenta.
-            <button class="outline">
-              {% include "icons/plus.svg" %} realizar Pago de tarjeta
-            </button>
-          </p>
-        </div>
         <div class="inputs_container">
           <div class="payments_services">
-            <h2>Pago de servicios</h2>
+            <h2>Pre-autorización</h2>
             <p>
-              Aquí puedes realizar el pago de <br />
-              todos tus servicios básicos.
-              <button>
-                {% include "icons/dollar-sign.svg" %} Realizar pago
-              </button>
+              Aquí puedes realizar la <br />preautorizacion de cheques.
+              <button>{% include "icons/edit-3.svg" %} Preautorizar</button>
             </p>
           </div>
           <div class="payments_accounts">
             <div class="inputRow">
               <select
-                id="from_account"
+                id="account"
                 autocomplete="off"
                 required
                 aria-placeholder="Seleccionar cuenta"
@@ -50,31 +37,49 @@
                 <option>0000004 Alex Santos</option>
               </select>
 
-              <label for="from_account">Cuenta a debitar</label>
+              <label for="account">Cuenta de cheque</label>
               {% include "icons/user.svg" %}
             </div>
             <div class="inputRow">
-              <select
-                id="from_account"
+              <input
+                type="number"
+                id="no_check"
                 autocomplete="off"
+                placeholder="2938082380"
+                oninvalid="this.setCustomValidity('Ingresa un número de cheque valido')"
+                oninput="this.setCustomValidity('')"
                 required
-                aria-placeholder="Seleccionar tipo de pago"
-              >
-                <option
-                  hidden
-                  selected
-                  disabled
-                  value="Seleccionar tipo de pago"
-                >
-                  Seleccionar tipo de pago
-                </option>
-                <option>Pago de luz</option>
-                <option>Pago de agua</option>
-                <option>Pago de teléfono</option>
-              </select>
+              />
+              <label for="no_check">Número de cheque</label>
+              {% include "icons/credit-card.svg" %}
+            </div>
 
-              <label for="from_account">Tipo de pago</label>
-              {% include "icons/user.svg" %}
+            <div class="inputRow">
+              <input
+                type="number"
+                id="amount"
+                autocomplete="off"
+                placeholder="999.99"
+                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="amount">Monto</label>
+              {% include "icons/dollar-sign.svg" %}
+            </div>
+
+            <div class="inputRow">
+              <input
+                type="text"
+                id="name"
+                autocomplete="off"
+                placeholder="Nombre completo"
+                oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="name">Beneficiario</label>
+              {% include "icons/users.svg" %}
             </div>
           </div>
         </div>
@@ -83,73 +88,68 @@
         <!-- CUENTAS MONETARIAS -->
         <div class="accounts">
           <div class="account_container">
-            <h2>Pagos de <strong>servicios:</strong></h2>
+            <h2>Historial de <strong>cheques:</strong></h2>
 
             <ul class="accounts_table">
               <li>
-                <strong>Código</strong>
-                <strong>Descripción</strong>
+                <strong>Correlativo</strong>
+                <strong>No. cuenta</strong>
                 <strong>Monto</strong>
                 <strong>Estado</strong>
                 <strong>Acciones</strong>
               </li>
               <li>
-                <p><strong>234234</strong></p>
-                <p>Pago de luz</p>
+                <p><strong>000001</strong></p>
+                <p>83749827349</p>
                 <p>Q321.22</p>
-                <p><strong>Pagado</strong></p>
+                <p><strong>Cobrado</strong></p>
                 <p><button>{% include "icons/settings.svg" %}</button></p>
               </li>
               <li>
-                <p><strong>S24132</strong></p>
-                <p>Pago de agua</p>
+                <p><strong>000002</strong></p>
+                <p>89237497833</p>
                 <p>Q300.23</p>
-                <p><strong>Pendiente</strong></p>
+                <p><strong>Autorizado</strong></p>
                 <p><button>{% include "icons/settings.svg" %}</button></p>
               </li>
               <li>
-                <p><strong>NBS21</strong></p>
-                <p>Pago de teléfono</p>
+                <p><strong>000003</strong></p>
+                <p>176152525723</p>
                 <p>Q999.24</p>
-                <p><strong>Pagado</strong></p>
+                <p><strong>Cobrado</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+              <li>
+                <p><strong>000004</strong></p>
+                <p>83749827349</p>
+                <p>Q321.22</p>
+                <p><strong>Cobrado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000005</strong></p>
+                <p>89237497833</p>
+                <p>Q300.23</p>
+                <p><strong>Autorizado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000006</strong></p>
+                <p>176152525723</p>
+                <p>Q999.24</p>
+                <p><strong>Cobrado</strong></p>
                 <p>
                   <button>{% include "icons/settings.svg" %}</button>
                 </p>
               </li>
             </ul>
           </div>
-
-          <div class="account_container">
-            <h2>Pagos de <strong>tarjetas:</strong></h2>
-
-            <ul class="accounts_table">
-              <li>
-                <strong>No. Tarjeta</strong>
-                <strong>Nombre</strong>
-                <strong>Saldo</strong>
-                <strong>Tipo</strong>
-                <strong>Acciones</strong>
-              </li>
-              <li>
-                <p><strong>000002</strong></p>
-                <p>Alex Santos</p>
-                <p>Q321.22</p>
-                <p><strong>Crédito</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000003</strong></p>
-                <p>Daniel Valenzuela</p>
-                <p>Q300.23</p>
-                <p><strong>Débito</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-            </ul>
-          </div>
         </div>
 
         <img
-          src="{% static 'images/payment.svg' %}"
+          src="{% static 'images/checks.svg' %}"
           alt="Accounts Illustration"
         />
       </div>

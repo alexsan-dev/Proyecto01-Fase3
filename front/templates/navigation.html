@@ -46,18 +46,19 @@
           >
         </li>
         <li>
-          <a href="#" id="checks"
+          <a href="{% url 'checks' %}" id="checks"
             >{% include "icons/check-square.svg" %} <span>Cheques</span></a
           >
         </li>
         <li>
-          <a href="#" id="loafs"
+          <a href="{% url 'loans' %}" id="loans"
             >{% include "icons/book-open.svg" %} <span>Prestamos</span></a
           >
         </li>
         <li>
           <a href="#" id="history"
-            >{% include "icons/align-left.svg" %} <span>Historial</span></a
+            >{% include "icons/align-left.svg" %}
+            <span>Estados de cuenta</span></a
           >
         </li>
       </ul>
