@@ -1,0 +1,165 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pago de planillas y proveedores | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <div class="title">
+        <div class="inputs_container">
+          <div class="payments_services">
+            <h2>Pago de planilla</h2>
+            <p>
+              Aquí puedes realizar el pago<br />
+              a empleados o proveedores.
+              <button>
+                {% include "icons/dollar-sign.svg" %} Realizar pago
+              </button>
+            </p>
+          </div>
+          <div class="payments_accounts">
+            <div class="inputRow">
+              <select
+                id="from_account"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar cuenta"
+              >
+                <option hidden selected disabled value="Seleccionar cuenta">
+                  Seleccionar cuenta
+                </option>
+                <option>0000001 Alex Santos</option>
+                <option>0000003 Daniel Valenzuela</option>
+                <option>0000004 Alex Santos</option>
+              </select>
+
+              <label for="from_account">Cuenta a debitar</label>
+              {% include "icons/user.svg" %}
+            </div>
+            <div class="inputRow">
+              <select
+                id="pay_type"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar persona"
+              >
+                <option hidden selected disabled value="Seleccionar persona">
+                  Seleccionar persona
+                </option>
+                <option>Empleado</option>
+                <option>Proveedor</option>
+              </select>
+
+              <label for="pay_type">Empleado o proveedor</label>
+              {% include "icons/users.svg" %}
+            </div>
+
+            <div class="inputRow">
+              <input
+                type="number"
+                id="amount"
+                autocomplete="off"
+                placeholder="999.99"
+                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="amount">Monto</label>
+              {% include "icons/dollar-sign.svg" %}
+            </div>
+
+            <div class="inputRow">
+              <input
+                type="number"
+                id="to_account"
+                autocomplete="off"
+                placeholder="9823872328"
+                oninvalid="this.setCustomValidity('Ingresa una cuenta valida')"
+                oninput="this.setCustomValidity('')"
+                required
+              />
+              <label for="to_account">No. Cuenta</label>
+              {% include "icons/hash.svg" %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <!-- CUENTAS MONETARIAS -->
+        <div class="accounts">
+          <div class="account_container">
+            <h2>Historial de <strong>cheques:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>Código</strong>
+                <strong>No. cuenta</strong>
+                <strong>Monto</strong>
+                <strong>Tipo</strong>
+                <strong>Acciones</strong>
+              </li>
+              <li>
+                <p><strong>F7H82H3</strong></p>
+                <p>83749827349</p>
+                <p>Q3250.22</p>
+                <p><strong>Empleado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>873G4734</strong></p>
+                <p>89237497833</p>
+                <p>Q6823.23</p>
+                <p><strong>Proveedor</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>4884HSS</strong></p>
+                <p>176152525723</p>
+                <p>Q89328.24</p>
+                <p><strong>Empleado</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+              <li>
+                <p><strong>F7H82H3</strong></p>
+                <p>83749827349</p>
+                <p>Q3250.22</p>
+                <p><strong>Empleado</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>873G4734</strong></p>
+                <p>89237497833</p>
+                <p>Q6823.23</p>
+                <p><strong>Proveedor</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>4884HSS</strong></p>
+                <p>176152525723</p>
+                <p>Q89328.24</p>
+                <p><strong>Empleado</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <img
+          src="{% static 'images/spreads.svg' %}"
+          alt="Accounts Illustration"
+        />
+      </div>
+    </main>
+  </body>
+</html>

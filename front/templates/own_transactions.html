@@ -18,9 +18,14 @@
           <p>
             Aqui puedes hacer transaferencias en quetzales de una cuenta propia
             a otra.
-            <button class="outline">
+            <a
+              href='{% url "accounts" %}'
+              alt="Third accounts"
+              class="outline button"
+              style="margin-top: 10px"
+            >
               {% include "icons/plus.svg" %} Asociar Cuenta de terceros
-            </button>
+            </a>
           </p>
         </div>
       </div>

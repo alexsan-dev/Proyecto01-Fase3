@@ -48,5 +48,5 @@ def states(request):
     return renderTemplate(request, 'states')
 
 
-def admin(request):
-    return renderTemplate(request, 'admin')
+def spreads(request):
+    return renderTemplate(request, 'spreads')
