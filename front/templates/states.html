@@ -1,0 +1,88 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estados de cuenta | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <div class="title" style="height: 30%;">
+        <div class="description" style="margin-top: -15px;">
+          <h1>Estados de cuenta</h1>
+          <p>
+            Aquí se mostraran los estados de cuenta de todas tus cuentas asociadas.
+            <div class="inputRow" style="position: relative;top: 30px;">
+                <select
+                    id="account"
+                    autocomplete="off"
+                    required
+                    aria-placeholder="Seleccionar cuenta"
+                >
+                    <option hidden selected disabled value="Seleccionar cuenta">
+                    Seleccionar cuenta
+                    </option>
+                    <option>0000001 Alex Santos</option>
+                    <option>0000003 Daniel Valenzuela</option>
+                    <option>0000004 Alex Santos</option>
+                </select>
+                <label for="account">Seleccionar cuenta</label>
+                {% include "icons/user.svg" %}
+            </div>
+          </p>
+        </div>
+      </div>
+      <div class="container" style="height: 70%;">
+        <!-- CUENTAS MONETARIAS -->
+        <div class="accounts">
+          <div class="account_container">
+            <h2>Cuenta <strong>Monetaria:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>No. Cuenta</strong>
+                <strong>Nombre</strong>
+                <strong>Crédito</strong>
+                <strong>Estado</strong>
+                <strong>Acciones</strong>
+              </li>
+              <li>
+                <p><strong>000001</strong></p>
+                <p>Alex Santos</p>
+                <p>999.24</p>
+                <p><strong>Activa</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000002</strong></p>
+                <p>Daniel Valenzuela</p>
+                <p>Q5,522.24</p>
+                <p><strong>Suspendida</strong></p>
+                <p><button>{% include "icons/settings.svg" %}</button></p>
+              </li>
+              <li>
+                <p><strong>000003</strong></p>
+                <p>Alex Santos</p>
+                <p>Q999.24</p>
+                <p><strong>Activa</strong></p>
+                <p>
+                  <button>{% include "icons/settings.svg" %}</button>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <img
+          src="{% static 'images/states.svg' %}"
+          alt="Accounts Illustration"
+        />
+      </div>
+    </main>
+  </body>
+</html>

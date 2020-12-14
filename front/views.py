@@ -44,5 +44,9 @@ def loans(request):
     return renderTemplate(request, 'loans')
 
 
+def states(request):
+    return renderTemplate(request, 'states')
+
+
 def admin(request):
     return renderTemplate(request, 'admin')

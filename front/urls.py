@@ -13,5 +13,6 @@ urlpatterns = [
     path('payments/', views.payments, name='payments'),
     path('checks/', views.checks, name='checks'),
     path('loans/', views.loans, name='loans'),
+    path('states/', views.states, name='states'),
     path('admin/', views.admin, name='admin')
 ]
