@@ -18,7 +18,7 @@
     />
   </head>
   <body>
-    <form action="{% url 'admin' %}">
+    <form action="{% url 'accounts' %}">
       <h2>Crear usuario</h2>
       <p>
         Llena el siguiente formulario para registrarte en la banca en linea.
@@ -147,15 +147,20 @@
           class="button outline"
           href="{% url 'login' %}"
           title="Iniciar sesión"
-          >Iniciar sesión</a
         >
+          <span style="width: 100%; text-align: center">Iniciar sesión</span>
+        </a>
         <a
           class="button outline"
           href="{% url 'business_signing' %}"
           title="Registrar empresa"
-          >Registrar empresa</a
+          ><span style="width: 100%; text-align: center"
+            >Registrar empresa</span
+          ></a
         >
-        <button>Registrarse</button>
+        <button>
+          <span style="width: 100%; text-align: center">Registrarse</span>
+        </button>
       </div>
     </form>
   </body>

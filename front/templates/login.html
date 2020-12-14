@@ -10,7 +10,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <form action="{% url 'admin' %}">
+    <form action="{% url 'accounts' %}">
       <h2>Iniciar sesión</h2>
       <p>Si ya tienes una cuenta en la banca en línea puedes iniciar aquí.</p>
       <div class="inputRow">
@@ -43,9 +43,11 @@
       </div>
       <div id="actions">
         <a class="button outline" href="{% url 'signing' %}" title="Registrarse"
-          >Registrarse</a
+          ><span style="width: 100%; text-align: center">Registrarse</span></a
         >
-        <button>Iniciar sesión</button>
+        <button>
+          <span style="width: 100%; text-align: center">Iniciar sesión</span>
+        </button>
       </div>
     </form>
   </body>
