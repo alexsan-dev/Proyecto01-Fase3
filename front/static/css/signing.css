@@ -72,3 +72,34 @@ form > #actions > a:first-child {
 form > #actions > a:nth-child(2) {
   margin-right: 10px;
 }
+
+#isSingle ~ .inputGrid > #account_business {
+  display: flex;
+}
+#isSingle:checked ~ .inputGrid > #account_business {
+  display: none;
+}
+
+#isSingle ~ .inputGrid > #account_cui {
+  display: none;
+}
+#isSingle:checked ~ .inputGrid > #account_cui {
+  display: flex;
+}
+
+.account_select {
+  position: absolute;
+  top: 140px;
+  height: 50px;
+  z-index: 1;
+  left: 00px;
+  width: 245px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 1em;
+  border: 2px solid #bbb;
+  padding: 0 10px 0 2.6em;
+  transition: border-color 0.2s ease-in-out;
+}

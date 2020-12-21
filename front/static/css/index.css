@@ -116,6 +116,7 @@ button.outline:focus,
   left: 15px;
   transition: color 0.2s ease-in-out;
   stroke: #888;
+  z-index: 2;
 }
 
 .inputRow > label {
@@ -130,6 +131,7 @@ button.outline:focus,
   font-weight: bold;
   color: #888;
   border-radius: 5px;
+  z-index: 2;
 }
 
 .inputRow > input,
@@ -144,6 +146,49 @@ button.outline:focus,
   border: 2px solid #bbb;
   padding: 0 10px 0 2.9em;
   transition: border-color 0.2s ease-in-out;
+}
+
+.inputRow > input[type="checkbox"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 4;
+}
+
+.inputRow > input[type="checkbox"] + label {
+  position: relative;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 1em;
+  border: 2px solid #bbb;
+  padding: 0 10px 0 2.9em;
+  transition: border-color 0.2s ease-in-out;
+  transform: none;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.inputRow > input[type="checkbox"] + label > span {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-190%) scale(0.9);
+  font-size: 0.9em;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  background-color: #fff;
+  padding: 0 10px;
+  font-weight: bold;
+  color: #888;
+  border-radius: 5px;
 }
 
 .inputRow > input:hover,
@@ -194,4 +239,50 @@ button.outline:focus,
   body {
     font-size: 15px;
   }
+}
+
+.checkInp {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 15px;
+  left: 15px;
+  z-index: 4;
+}
+
+.label_checkInp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: -20px;
+  margin-left: 0px;
+  margin-bottom: -50px;
+  font-weight: 500;
+  width: 245px;
+  color: #777;
+  z-index: 3;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  height: 50px;
+  font-size: 1em;
+  border: 2px solid #bbb;
+  padding: 0 10px 0 2.9em;
+  transition: border-color 0.2s ease-in-out;
+  background-color: #fff;
+}
+
+.label_checkInp > span {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-190%) scale(0.9);
+  font-size: 0.9em;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  background-color: #fff;
+  padding: 0 10px;
+  font-weight: bold;
+  color: #888;
+  border-radius: 5px;
 }

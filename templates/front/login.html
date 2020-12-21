@@ -10,26 +10,29 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <form action="{% url 'accounts' %}">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
       <h2>Iniciar sesión</h2>
       <p>Si ya tienes una cuenta en la banca en línea puedes iniciar aquí.</p>
       <div class="inputRow">
         <input
-          type="email"
-          id="email"
+          type="username"
+          id="username"
+          name="username"
           autocomplete="off"
-          placeholder="name@domain.com"
-          oninvalid="this.setCustomValidity('Ingresa un correo valido')"
+          placeholder="Nuevo usuario"
+          oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
           oninput="this.setCustomValidity('')"
           required
         />
-        <label for="email">Correo electrónico</label>
-        {% include "icons/mail.svg" %}
+        <label for="email">Nombre de usuario</label>
+        {% include "icons/user.svg" %}
       </div>
       <div class="inputRow">
         <input
           type="password"
           id="password"
+          name="password"
           autocomplete="off"
           placeholder="Contraseña segura"
           oninvalid="this.setCustomValidity('La contraseña es obligatoria')"
@@ -42,9 +45,6 @@
         {% include "icons/lock.svg" %}
       </div>
       <div id="actions">
-        <a class="button outline" href="{% url 'signing' %}" title="Registrarse"
-          ><span style="width: 100%; text-align: center">Registrarse</span></a
-        >
         <button>
           <span style="width: 100%; text-align: center">Iniciar sesión</span>
         </button>

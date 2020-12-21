@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrarse | Banca Virtual</title>
+    <title>Registrar empresa | Banca Virtual</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
     <link
@@ -18,76 +18,79 @@
     />
   </head>
   <body>
-    <form action="{% url 'accounts' %}">
-      <h2>Crear usuario</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Crear usuario empresarial</h2>
       <p>
-        Llena el siguiente formulario para registrarte en la banca en linea.
+        Llena el siguiente formulario para registrar un usuario en el banco.
       </p>
       <div class="inputGrid">
         <div class="inputRow">
-          <input
-            type="text"
-            id="cui"
+          <select
+            id="businessType"
+            name="businessType"
             autocomplete="off"
-            placeholder="3773328520115"
-            maxlength="13"
-            minlength="13"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un CUI valido')"
-            oninput="this.setCustomValidity('')"
             required
-          />
-          <label for="cui">Número de CUI o DPI</label>
-          {% include "icons/credit-card.svg" %}
-        </div>
-        <div class="inputRow">
-          <input
-            type="text"
-            id="nit"
-            autocomplete="off"
-            placeholder="123456"
-            minlength="5"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un NIT valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
-          <label for="nit">Número de NIT</label>
-          {% include "icons/hash.svg" %}
+          >
+            <option selected disabled>Seleccionar tipo</option>
+            <option value="Sociedad anónima">Sociedad anónima</option>
+            <option value="Compañía limitada">Compañía limitada</option>
+            <option value="Empresa individual">Empresa individual</option>
+          </select>
+
+          <label for="businessType">Tipo de empresa</label>
+          {% include "icons/briefcase.svg" %}
         </div>
         <div class="inputRow">
           <input
             type="text"
             id="name"
+            name="name"
             autocomplete="off"
-            placeholder="Nuevo usuario"
+            placeholder="Nueva empresa"
             minlength="3"
             oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
             oninput="this.setCustomValidity('')"
             required
           />
-          <label for="name">Nombre completo</label>
-          {% include "icons/user.svg" %}
+          <label for="name">Nombre de la empresa</label>
+          {% include "icons/users.svg" %}
         </div>
         <div class="inputRow">
           <input
-            type="date"
-            id="birth"
+            type="text"
+            id="comercialName"
+            name="comercialName"
             autocomplete="off"
-            placeholder="dd-mm-yyyy"
-            value="2020-12-05"
-            pattern="\d{1,2}/\d{1,2}/\d{4}"
-            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
+            placeholder="MiEmpresa"
+            minlength="3"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
             oninput="this.setCustomValidity('')"
             required
           />
-          <label for="birth">Fecha de nacimiento</label>
-          {% include "icons/calendar.svg" %}
+          <label for="comercialName">Nombre comercial</label>
+          {% include "icons/user-plus.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="text"
+            id="agent"
+            name="agent"
+            autocomplete="off"
+            placeholder="Nombre completo"
+            minlength="3"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="agent">Representante legal</label>
+          {% include "icons/file.svg" %}
         </div>
         <div class="inputRow">
           <input
             type="email"
-            id="email"
+            id="agent"
+            name="email"
             autocomplete="off"
             placeholder="name@domain.com"
             oninvalid="this.setCustomValidity('Ingresa un correo valido')"
@@ -101,9 +104,11 @@
           <input
             type="tel"
             id="phone"
+            name="phone"
             autocomplete="off"
             placeholder="50235678555"
             minlength="5"
+            maxlength="8"
             pattern="\d*"
             oninvalid="this.setCustomValidity('Ingresa un número valido')"
             oninput="this.setCustomValidity('')"
@@ -116,6 +121,7 @@
           <input
             type="password"
             id="password"
+            name="password"
             autocomplete="off"
             placeholder="Contraseña segura"
             minlength="8"
@@ -130,6 +136,7 @@
           <input
             type="password"
             id="confirm_password"
+            name="confirm_password"
             autocomplete="off"
             placeholder="Contraseña segura"
             minlength="8"
@@ -143,23 +150,10 @@
       </div>
 
       <div id="actions">
-        <a
-          class="button outline"
-          href="{% url 'login' %}"
-          title="Iniciar sesión"
-        >
-          <span style="width: 100%; text-align: center">Iniciar sesión</span>
-        </a>
-        <a
-          class="button outline"
-          href="{% url 'business_signing' %}"
-          title="Registrar empresa"
-          ><span style="width: 100%; text-align: center"
-            >Registrar empresa</span
-          ></a
-        >
         <button>
-          <span style="width: 100%; text-align: center">Registrarse</span>
+          <span style="width: 100%; text-align: center"
+            >Registrarse empresa</span
+          >
         </button>
       </div>
     </form>

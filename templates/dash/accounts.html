@@ -1,0 +1,166 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear cuenta | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Crear cuenta individual o empresarial</h2>
+      <p>Llena el siguiente formulario para crear una cuenta en el banco.</p>
+      <input
+        type="checkbox"
+        id="isSingle"
+        name="isSingle"
+        class="checkInp"
+        name="isSingle"
+        autocomplete="off"
+        checked
+      />
+      <label for="isSingle" class="label_checkInp"
+        >Es individual <span>Tipo de usuario</span></label
+      >
+      <div class="inputGrid">
+        <div class="inputRow"></div>
+        <div class="inputRow" id="account_cui">
+          <input
+            type="number"
+            id="userCui"
+            name="userCui"
+            autocomplete="off"
+            placeholder="3773328520115"
+            maxlength="13"
+            minlength="13"
+            pattern="\d*"
+            oninvalid="this.setCustomValidity('Ingresa un CUI valido')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="userCui">Número de CUI o DPI</label>
+          {% include "icons/credit-card.svg" %}
+        </div>
+        <div class="inputRow" id="account_business">
+          <input
+            type="text"
+            id="userBusiness"
+            name="userBusiness"
+            autocomplete="off"
+            placeholder="Nueva empresa"
+            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="userBusiness">Nombre comercial (empresa)</label>
+          {% include "icons/briefcase.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="number"
+            id="accountId"
+            name="accountId"
+            autocomplete="off"
+            placeholder="123456"
+            minlength="6"
+            maxlength="6"
+            pattern="\d*"
+            oninvalid="this.setCustomValidity('Ingresa una cuenta valida')"
+            oninput="this.setCustomValidity('')"
+            required
+          />
+          <label for="accountId">Número de cuenta</label>
+          {% include "icons/hash.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="checkbox"
+            name="isDollar"
+            id="isDollar"
+            name="isDollar"
+            autocomplete="off"
+          />
+          <label for="isDollar">En dolares <span>Divisa</span></label>
+        </div>
+
+        <select
+          type="text"
+          id="accountType"
+          name="accountType"
+          autocomplete="off"
+          class="account_select"
+          placeholder="Seleccionar tipo"
+          oninvalid="this.setCustomValidity('Ingresa un tipo valido')"
+          oninput="this.setCustomValidity('')"
+          required
+        >
+          <option value="select" selected disabled>Seleccionar tipo</option>
+          <option value="saving" class="saving_option">Ahorros</option>
+          <option value="timedSaving" class="timedSaving_option">
+            Ahorro plazo fijo
+          </option>
+          <option value="monetary" class="monetary_option">Monetaria</option>
+        </select>
+
+        <div class="inputRow">
+          <label for="accountType">Tipo de cuenta</label>
+          {% include "icons/book-open.svg" %}
+        </div>
+        <div class="inputRow" id="account_interest">
+          <input
+            type="number"
+            id="interest"
+            name="interest"
+            autocomplete="off"
+            placeholder="100.00"
+            oninvalid="this.setCustomValidity('Ingresa un interés valido')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="interest">Interés</label>
+          {% include "icons/credit-card.svg" %}
+        </div>
+        <div class="inputRow" id="account_description">
+          <input
+            type="text"
+            id="description"
+            name="description"
+            autocomplete="off"
+            placeholder="Cuenta personal"
+            oninvalid="this.setCustomValidity('Ingresa una descripción valida')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="description">Descripción</label>
+          {% include "icons/credit-card.svg" %}
+        </div>
+        <div class="inputRow" id="account_plan">
+          <input
+            type="date"
+            id="plan"
+            name="plan"
+            autocomplete="off"
+            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="plan">Fecha de retiro</label>
+          {% include "icons/credit-card.svg" %}
+        </div>
+      </div>
+
+      <div id="actions">
+        <button>
+          <span style="width: 100%; text-align: center">Crear cuenta</span>
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
