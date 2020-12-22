@@ -8,7 +8,7 @@ def login_form(request, fetch_query):
         user = fetch_query(
             f'SELECT * FROM SingleUser WHERE username = "{username}" AND password = "{password}";')
         business_user = fetch_query(
-            f'SELECT * FROM BusinessUser WHERE username = "{username}" AND password = "{password}";')
+            f'SELECT * FROM BusinessUser WHERE comercialName = "{username}" AND password = "{password}";')
 
         if len(user) > 0 or len(business_user) > 0:
             return True

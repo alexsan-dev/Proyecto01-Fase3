@@ -82,15 +82,14 @@
               </li>
               {% for account in accounts %}
               <li>
-                <p>{{account.0}}</p>
+                <p>{{account.id}}</p>
+                <p>{{account.type}}</p>
+                <p>{{ account.balance }}</p>
+                <p>{% if account.isDollar == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
                 <p>
-                  {% if account.10 %} Ahorro {% elif account.11 %} Plazo fijo {% else %} Monetaria
-                  {% endif %}
-                </p>
-                <p>{{ account.13 }}</p>
-                <p>{% if account.6 == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
-                <p>
-                  <strong>{% if account.1 == 1 %} Activa {% else %} Suspendida {% endif %}</strong>
+                  <strong
+                    >{% if account.state == 1 %} Activa {% else %} Suspendida {% endif %}</strong
+                  >
                 </p>
               </li>
               {% endfor %}

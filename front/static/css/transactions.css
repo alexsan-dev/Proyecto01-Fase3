@@ -22,11 +22,7 @@
   right: 0;
   height: 100%;
   width: 50%;
-  background: linear-gradient(
-    to right,
-    rgba(33, 150, 243, 0.4),
-    rgba(33, 150, 243, 0.2)
-  );
+  background: linear-gradient(to right, rgba(33, 150, 243, 0.4), rgba(33, 150, 243, 0.2));
   z-index: 1;
 }
 
@@ -44,6 +40,7 @@
   margin-left: -40px;
   transform: scaleX(-1);
   z-index: 3;
+  pointer-events: none;
 }
 
 .account_box {

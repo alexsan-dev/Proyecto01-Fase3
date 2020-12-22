@@ -60,6 +60,7 @@ class Businessuser(models.Model):
     businesstype = models.CharField(db_column='businessType', max_length=50, blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(max_length=30)
     agent = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
     phone = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -86,16 +87,18 @@ class Savingaccount(models.Model):
 
 
 class Singleuser(models.Model):
-    cui = models.CharField(primary_key=True, max_length=13)
-    nit = models.CharField(max_length=12)
+    cui = models.BigIntegerField(primary_key=True)
+    nit = models.BigIntegerField()
     name = models.CharField(max_length=30)
     birth = models.DateField()
     username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
     phone = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'SingleUser'
+        unique_together = (('cui', 'username'),)
 
 
 class Thirdaccount(models.Model):
@@ -121,7 +124,7 @@ class Timedsavingaccount(models.Model):
 
 
 class Transactions(models.Model):
-    ammount = models.IntegerField()
+    amount = models.IntegerField()
     description = models.CharField(max_length=20, blank=True, null=True)
     date = models.DateField()
     originaccount = models.ForeignKey(Account, models.DO_NOTHING, db_column='originAccount')  # Field name made lowercase.

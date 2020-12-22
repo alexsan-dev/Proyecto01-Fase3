@@ -28,13 +28,15 @@
           </p>
         </div>
       </div>
-      <form class="container">
+      <form class="container" method="POST">
+        {% csrf_token %}
         <div class="account_box">
           <h2>Cuenta a debitar:</h2>
           <p>Asegurate de disponer de una cuenta con fondos para la transferencia.</p>
           <div class="inputRow">
             <select
-              id="from_account"
+              id="originAccount"
+              name="originAccount"
               autocomplete="off"
               required
               aria-placeholder="Seleccionar cuenta"
@@ -42,13 +44,18 @@
               <option hidden selected disabled value="Seleccionar cuenta">
                 Seleccionar cuenta
               </option>
-              <option>0000001 Alex Santos</option>
-              <option>0000003 Daniel Valenzuela</option>
-              <option>0000004 Alex Santos</option>
+              {% for account in accounts %}
+              <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+              {% endfor %}
             </select>
 
-            <label for="from_account">Cuenta de origen</label>
+            <label for="originAccount">Cuenta de origen</label>
             {% include "icons/user.svg" %}
+          </div>
+          <div class="inputRow">
+            {{ form.amount }}
+            <label for="amount">Monto</label>
+            {% include "icons/dollar-sign.svg" %}
           </div>
         </div>
 
@@ -57,7 +64,8 @@
           <p>Asegurate de no acreditar a la misma cuenta de donde se debita.</p>
           <div class="inputRow">
             <select
-              id="to_account"
+              id="destAccount"
+              name="destAccount"
               autocomplete="off"
               required
               aria-placeholder="Seleccionar cuenta"
@@ -65,13 +73,18 @@
               <option hidden selected disabled value="Seleccionar cuenta">
                 Seleccionar cuenta
               </option>
-              <option>0000001 Alex Santos</option>
-              <option>0000003 Daniel Valenzuela</option>
-              <option>0000004 Alex Santos</option>
+              {% for account in accounts %}
+              <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+              {% endfor %}
             </select>
 
-            <label for="to_account">Cuenta de destino</label>
+            <label for="destAccount">Cuenta de destino</label>
             {% include "icons/user.svg" %}
+          </div>
+          <div class="inputRow">
+            {{ form.description }}
+            <label for="description">Descripcion</label>
+            {% include "icons/align-justify.svg" %}
           </div>
         </div>
 
