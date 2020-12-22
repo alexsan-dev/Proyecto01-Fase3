@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
+
   <body>
     {% include "navigation.html" %}
     <main>
@@ -16,10 +17,9 @@
         <div class="description">
           <h1>Información de cuentas</h1>
           <p>
-            Aquí se mostrara la información básica de todas tus cuentas
-            asociadas a tu usuario.
+            Aquí se mostrara la información básica de todas tus cuentas asociadas a tu usuario.
             <a
-              href='{% url "states" %}'
+              href='{% url "states" username=username %}'
               class="outline button"
               style="margin-top: 10px"
             >
@@ -56,9 +56,7 @@
                 required
                 aria-placeholder="Seleccionar tipo"
               >
-                <option hidden selected disabled value="Seleccionar tipo">
-                  Seleccionar tipo
-                </option>
+                <option hidden selected disabled value="Seleccionar tipo">Seleccionar tipo</option>
                 <option>Monetaria</option>
                 <option>De ahorro</option>
               </select>
@@ -73,84 +71,34 @@
         <!-- CUENTAS MONETARIAS -->
         <div class="accounts">
           <div class="account_container">
-            <h2>Cuentas <strong>Monetarias:</strong></h2>
-
+            <h2>Cuentas de <strong>{{username}}</strong></h2>
             <ul class="accounts_table">
               <li>
                 <strong>No. Cuenta</strong>
-                <strong>Nombre</strong>
-                <strong>Crédito</strong>
+                <strong>Tipo de cuenta</strong>
+                <strong>Saldo</strong>
+                <strong>Moneda</strong>
                 <strong>Estado</strong>
-                <strong>Acciones</strong>
               </li>
+              {% for account in accounts %}
               <li>
-                <p><strong>000001</strong></p>
-                <p>Alex Santos</p>
-                <p>999.24</p>
-                <p><strong>Activa</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000002</strong></p>
-                <p>Daniel Valenzuela</p>
-                <p>Q5,522.24</p>
-                <p><strong>Suspendida</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000003</strong></p>
-                <p>Alex Santos</p>
-                <p>Q999.24</p>
-                <p><strong>Activa</strong></p>
+                <p>{{account.0}}</p>
                 <p>
-                  <button>{% include "icons/settings.svg" %}</button>
+                  {% if account.10 %} Ahorro {% elif account.11 %} Plazo fijo {% else %} Monetaria
+                  {% endif %}
+                </p>
+                <p>{{ account.13 }}</p>
+                <p>{% if account.6 == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
+                <p>
+                  <strong>{% if account.1 == 1 %} Activa {% else %} Suspendida {% endif %}</strong>
                 </p>
               </li>
-            </ul>
-          </div>
-
-          <div class="account_container">
-            <h2>Cuentas de <strong>Ahorro:</strong></h2>
-
-            <ul class="accounts_table">
-              <li>
-                <strong>No. Cuenta</strong>
-                <strong>Nombre</strong>
-                <strong>Crédito</strong>
-                <strong>Estado</strong>
-                <strong>Acciones</strong>
-              </li>
-              <li>
-                <p><strong>000001</strong></p>
-                <p>Alex Santos</p>
-                <p>999.24</p>
-                <p><strong>Activa</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000002</strong></p>
-                <p>Daniel Valenzuela</p>
-                <p>Q5,522.24</p>
-                <p><strong>Suspendida</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000003</strong></p>
-                <p>Alex Santos</p>
-                <p>Q999.24</p>
-                <p><strong>Activa</strong></p>
-                <p>
-                  <button>{% include "icons/settings.svg" %}</button>
-                </p>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
 
-        <img
-          src="{% static 'images/accounts.svg' %}"
-          alt="Accounts Illustration"
-        />
+        <img src="{% static 'images/accounts.svg' %}" alt="Accounts Illustration" />
       </div>
     </main>
   </body>

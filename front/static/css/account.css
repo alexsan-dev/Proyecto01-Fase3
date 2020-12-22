@@ -125,12 +125,6 @@ main > .container > img {
   color: #333;
 }
 
-.accounts_table > li > p:last-child {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .accounts_table > li > p:last-child > button {
   --color: transparent;
   color: #333;

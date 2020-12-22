@@ -16,10 +16,9 @@
         <div class="description">
           <h1>Cuentas propias</h1>
           <p>
-            Aqui puedes hacer transaferencias en quetzales de una cuenta propia
-            a otra.
+            Aqui puedes hacer transaferencias en quetzales de una cuenta propia a otra.
             <a
-              href='{% url "accounts" %}'
+              href='{% url "accounts" username=username %}'
               alt="Third accounts"
               class="outline button"
               style="margin-top: 10px"
@@ -32,10 +31,7 @@
       <form class="container">
         <div class="account_box">
           <h2>Cuenta a debitar:</h2>
-          <p>
-            Asegurate de disponer de una cuenta con fondos para la
-            transferencia.
-          </p>
+          <p>Asegurate de disponer de una cuenta con fondos para la transferencia.</p>
           <div class="inputRow">
             <select
               id="from_account"

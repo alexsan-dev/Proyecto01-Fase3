@@ -1,21 +1,16 @@
-def login_form(request, get_query):
+def login_form(request, fetch_query):
     if request.method == 'POST':
         # VARIABLES
         username = request.POST['username']
         password = request.POST['password']
 
         # VERIFICAR
-        cursor = get_query(
+        user = fetch_query(
             f'SELECT * FROM SingleUser WHERE username = "{username}" AND password = "{password}";')
-        cursor[0].commit()
+        business_user = fetch_query(
+            f'SELECT * FROM BusinessUser WHERE username = "{username}" AND password = "{password}";')
 
-        # LISTA
-        user = cursor[1].fetchall()
-
-        # CERRAR
-        cursor[1].close()
-
-        if len(user) > 0:
+        if len(user) > 0 or len(business_user) > 0:
             return True
         else:
             return False
