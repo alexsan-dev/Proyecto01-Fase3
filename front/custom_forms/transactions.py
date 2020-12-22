@@ -27,11 +27,15 @@ def transactions_form(request, username, get_accounts, set_query):
             # VERIFICAR QUE NO SEA LA MISMA CUENTA
             if originAccount != destAccount:
                 # VERIFICAR SI TIENE EL SALDO
-                if int(current_account['balance']) >= int(amount):
+                if float(current_account['balance']) >= float(amount):
                     # CREAR TRANSACCION
                     set_query(
                         f'INSERT INTO Transactions VALUES (null, {amount}, "{description}", "{date}", {originAccount}, {destAccount}, 0)')
 
                     # AGREGAR DEBITO A CUENTA
-                    totalDebit = int(current_account['debit']) + int(amount)
-                    set_query(f'UPDATE Account SET debit = {totalDebit}')
+                    set_query(
+                        f'UPDATE Account SET debit = debit + {float(amount)} WHERE id = {originAccount}')
+
+                    # AGREGAR CREDITO A OTRA CUENTA
+                    set_query(
+                        f'UPDATE Account SET credit = credit + {float(amount)} WHERE id = {destAccount}')

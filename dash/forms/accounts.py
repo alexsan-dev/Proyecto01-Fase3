@@ -26,7 +26,7 @@ def accounts_form(request, set_query):
                 f'INSERT INTO AccountType(id, saving) VALUES ({accountId}, {accountId}); ')
         elif accountType == 'timedSaving':
             set_query(
-                f'INSERT INTO TimedSavingAccount VALUES ({accountId}, {interest}, {plan}); ')
+                f'INSERT INTO TimedSavingAccount VALUES ({accountId}, {interest}, "{plan}"); ')
             set_query(
                 f'INSERT INTO AccountType(id, timedSaving) VALUES ({accountId}, {accountId}); ')
         elif accountType == 'monetary':
