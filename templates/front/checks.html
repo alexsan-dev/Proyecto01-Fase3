@@ -9,6 +9,23 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
+  <style>
+    #check_enable ~ #enable_check {
+      display: none;
+    }
+
+    #check_enable ~ #disable_check {
+      display: flex;
+    }
+
+    #check_enable:checked ~ #enable_check {
+      display: flex;
+    }
+
+    #check_enable:checked ~ #disable_check {
+      display: none;
+    }
+  </style>
   <body>
     {% include "navigation.html" %}
     <main>
@@ -50,6 +67,42 @@
 
               <label for="check">Numero de cheque</label>
               {% include "icons/credit-card.svg" %}
+            </div>
+          </div>
+        </form>
+        <form class="inputs_container" method="POST">
+          {% csrf_token %}
+          <div class="payments_services">
+            <h2>Cheques</h2>
+            <p>
+              Aquí puedes habilitar la <br />chequera virtual de cuentas.
+              <button>{% include "icons/save.svg" %} Guardar cambios</button>
+            </p>
+          </div>
+          <div class="payments_accounts" style="grid-template-columns: auto">
+            <div class="inputRow">
+              <select
+                id="check_account"
+                name="check_account"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar cuenta"
+              >
+                <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
+                {% for account in accounts %}
+                <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+                {% endfor %}
+              </select>
+
+              <label for="check_account">Cuenta de chequera</label>
+              {% include "icons/user.svg" %}
+            </div>
+            <div class="inputRow">
+              <input type="checkbox" id="check_enable" name="check_enable" />
+              <label id="enable_check" for="from_account">Habilitado <span>Habilitar/Deshabilitar</span></label>
+              <label id="disable_check" for="from_account"
+                >Deshabilitado <span>Habilitar/Deshabilitar</span></label
+              >
             </div>
           </div>
         </form>

@@ -155,3 +155,12 @@ def checks(request):
     checks_queries(request, set_query, accounts)
 
     return render_template(request, 'checks', render)
+
+
+# VISTA DE CHEQUES
+
+
+def change_checks(request):
+    # FORMULARIO INICIAL
+    accounts = get_accounts()
+    return render_template(request, 'change_checks')
