@@ -77,13 +77,11 @@
                 <p>{{account.id}}</p>
                 <p>{{account.type}}</p>
                 <p>
-                  {% if account.isDollar == 1 %} $ {% else %} Q {% endif %} {{ account.balance }}
+                  {% if account.isDollar == 1 %} $ {% else %} Q {% endif %} {{ account.balance|floatformat:2 }}
                 </p>
                 <p>{% if account.isDollar == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
                 <p>
-                  <strong
-                    >{% if account.state == 1 %} Activa {% else %} Inactiva {% endif %}</strong
-                  >
+                  <strong>{% if account.state == 1 %} Activa {% else %} Inactiva {% endif %}</strong>
                 </p>
               </li>
               {% endfor %}

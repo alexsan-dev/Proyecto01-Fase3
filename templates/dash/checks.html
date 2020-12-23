@@ -1,0 +1,60 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar cheque | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+  </head>
+  <body>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Agregar a chequera</h2>
+      <p>Llena el siguiente formulario para crear un nuevo cheque.</p>
+      <div class="inputGrid">
+        <div class="inputRow">
+          {{form.name}}
+          <label for="businessType">Nombre del beneficiario</label>
+          {% include "icons/user.svg" %}
+        </div>
+        <div class="inputRow">
+          {{form.amount}}
+          <label for="name">Monto</label>
+          {% include "icons/dollar-sign.svg" %}
+        </div>
+        <div class="inputRow">
+          <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
+            <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
+            {% for account in accounts %}
+            <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+            {% endfor %}
+          </select>
+
+          <label for="account">Cuenta</label>
+          {% include "icons/book-open.svg" %}
+        </div>
+        <div class="inputRow">
+          <input
+            type="date"
+            id="date"
+            name="date"
+            autocomplete="off"
+            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
+            oninput="this.setCustomValidity('')"
+          />
+          <label for="plan">Fecha</label>
+          {% include "icons/calendar.svg" %}
+        </div>
+      </div>
+
+      <div id="actions">
+        <button>
+          <span style="width: 100%; text-align: center">Agregar cheque</span>
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

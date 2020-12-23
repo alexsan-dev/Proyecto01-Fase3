@@ -46,11 +46,11 @@ def fetch_query(query):
     cursor[0].commit()
 
     # LISTA
-    list = cursor[1].fetchall()
+    query_list = cursor[1].fetchall()
 
     # CERRAR
     cursor[1].close()
-    return list
+    return query_list
 
 # OBTENER USUARIO
 

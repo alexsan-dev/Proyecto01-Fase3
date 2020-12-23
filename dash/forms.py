@@ -21,3 +21,10 @@ class BusinessUser_Form(forms.ModelForm):
     class Meta:
         model = Businessuser
         fields = ('comercialname', 'name', 'agent', 'phone')
+
+
+class Checks_Form(forms.ModelForm):
+
+    class Meta:
+        model = Accountcheck
+        fields = ('name', 'amount')
