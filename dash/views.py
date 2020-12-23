@@ -2,8 +2,11 @@ from django.template.response import TemplateResponse
 import MySQLdb
 
 # VISTAS
-from .forms.accounts import accounts_form
-from .forms.signing import signing_form, business_signing_form
+from .queries.accounts import *
+from .queries.signing import *
+
+# FORM MODELS
+from .forms import *
 
 
 # CONEXIÓN A BASE DE DATOS
@@ -20,8 +23,8 @@ db = MySQLdb.connect(host=host, user=user, password=password,
 # ENVIAR TEMPLATE
 
 
-def renderTemplate(request, name):
-    response = TemplateResponse(request, f'dash/{name}.html', {})
+def render_template(request, name, params={}):
+    response = TemplateResponse(request, f'dash/{name}.html', params)
     return response
 
 # CREAR QUERY
@@ -37,18 +40,41 @@ def set_query(query):
 
 
 def accounts(request):
-    accounts_form(request, set_query)
-    return renderTemplate(request, 'accounts')
+    # FORMULARIO INICIAL
+    form = Account_Form()
+    render = {
+        "form": form
+    }
+
+    # RECUPERAR
+    set_accounts_queries(request, set_query)
+
+    # RENDER
+    return render_template(request, 'accounts', render)
 
 
 # VISTA DE CREACIÓN DE USUARIO
 def signing(request):
-    signing_form(request, set_query)
-    return renderTemplate(request, 'signing')
+    # FORMULARIO INICIAL
+    form = SingleUser_Form()
+    render = {
+        "form": form,
+    }
+
+    # RECUPERAR
+    set_signing_queries(request, set_query)
+    return render_template(request, 'signing', render)
 
 # VISTA DE CREACIÓN DE EMPRESA
 
 
 def business_signing(request):
-    business_signing_form(request, set_query)
-    return renderTemplate(request, 'business_signing')
+    # FORMULARIO INICIAL
+    form = BusinessUser_Form()
+    render = {
+        "form": form,
+    }
+
+    # RECUPERAR
+    business_signing_queries(request, set_query)
+    return render_template(request, 'business_signing', render)

@@ -18,54 +18,46 @@
           <h1>Información de cuentas</h1>
           <p>
             Aquí se mostrara la información básica de todas tus cuentas asociadas a tu usuario.
-            <a
-              href='{% url "states" username=username %}'
-              class="outline button"
-              style="margin-top: 10px"
-            >
+            <a href='{% url "states" %}' class="outline button" style="margin-top: 10px">
               {% include "icons/align-left.svg" %} Ver estados de cuenta
             </a>
           </p>
         </div>
-        <div style="display: flex; justify-content: flex-end">
+        <form style="display: flex; justify-content: flex-end" method="POST" novalidate>
+          {% csrf_token %}
           <div class="payments_services" style="width: 250px">
             <h2>Agregar cuenta</h2>
             <p>
               Llena estos datos para agregar <br />una cuenta de terceros.
-              <button>{% include "icons/plus.svg" %} Agregar cuenta</button>
+              <button type="submit">{% include "icons/plus.svg" %} Agregar cuenta</button>
             </p>
           </div>
           <div class="payments_accounts" style="position: relative; top: 12px">
             <div class="inputRow">
-              <input
-                type="number"
-                id="account_number"
-                autocomplete="off"
-                placeholder="3423423423"
-                oninvalid="this.setCustomValidity('Ingresa una cuenta valida')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
+              {{form.id}}
               <label for="account_number">No. Cuenta</label>
               {% include "icons/user.svg" %}
             </div>
+
             <div class="inputRow">
               <select
                 id="account_type"
+                name="account_type"
                 autocomplete="off"
                 required
                 aria-placeholder="Seleccionar tipo"
               >
                 <option hidden selected disabled value="Seleccionar tipo">Seleccionar tipo</option>
-                <option>Monetaria</option>
-                <option>De ahorro</option>
+                <option value="Monetaria">Monetaria</option>
+                <option value="Ahorro">De ahorro</option>
+                <option value="Plazo fijo">Plazo fijo</option>
               </select>
 
               <label for="account_type">Tipo de cuenta</label>
               {% include "icons/file.svg" %}
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="container">
         <!-- CUENTAS MONETARIAS -->
@@ -88,7 +80,7 @@
                 <p>{% if account.isDollar == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
                 <p>
                   <strong
-                    >{% if account.state == 1 %} Activa {% else %} Suspendida {% endif %}</strong
+                    >{% if account.state == 1 %} Activa {% else %} Inactiva {% endif %}</strong
                   >
                 </p>
               </li>

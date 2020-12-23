@@ -1,20 +1,24 @@
-from ..forms import transactions
+from ..forms import Transactions_Form
 from datetime import datetime
 
 
-def transactions_form(request, username, get_accounts, set_query):
+def transactions_queries(request, get_accounts, set_query):
     if request.method == 'POST':
         # OBTENER CUENTAS
-        account_res = get_accounts(username)
+        username = request.session['auth']['username']
+        account_res = get_accounts(request)
 
         # CREAR FORMULARIO NUEVO
-        form = transactions(data=request.POST)
+        form = Transactions_Form(data=request.POST)
         if form.is_valid():
+            # LEER FORMULARIO
             data = form.cleaned_data
             amount = data.get('amount')
             description = data.get('description')
             originAccount = request.POST['originAccount']
             destAccount = request.POST['destAccount']
+
+            # FECHA ACTUAL
             now = datetime.now()
             date = now.strftime("%Y/%m/%d")
 

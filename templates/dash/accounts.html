@@ -6,16 +6,8 @@
     <title>Crear cuenta | Banca Virtual</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
-    <link
-      rel="shortcut icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
   </head>
   <body>
     <form method="POST">
@@ -83,14 +75,8 @@
           {% include "icons/hash.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="checkbox"
-            name="isDollar"
-            id="isDollar"
-            name="isDollar"
-            autocomplete="off"
-          />
-          <label for="isDollar">En dolares <span>Divisa</span></label>
+          {{form.isdollar}}
+          <label for="is_dollar">En dolares <span>Divisa</span></label>
         </div>
 
         <select
@@ -106,9 +92,7 @@
         >
           <option value="select" selected disabled>Seleccionar tipo</option>
           <option value="saving" class="saving_option">Ahorros</option>
-          <option value="timedSaving" class="timedSaving_option">
-            Ahorro plazo fijo
-          </option>
+          <option value="timedSaving" class="timedSaving_option">Ahorro plazo fijo</option>
           <option value="monetary" class="monetary_option">Monetaria</option>
         </select>
 

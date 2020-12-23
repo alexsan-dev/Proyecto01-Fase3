@@ -1,4 +1,4 @@
-def login_form(request, fetch_query):
+def login_queries(request, fetch_query):
     if request.method == 'POST':
         # VARIABLES
         username = request.POST['username']

@@ -6,70 +6,27 @@
     <title>Crear usuario | Banca Virtual</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
-    <link
-      rel="shortcut icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
   </head>
   <body>
     <form method="POST">
       {% csrf_token %}
       <h2>Crear usuario individual</h2>
-      <p>
-        Llena el siguiente formulario para registrar un usuario en el banco.
-      </p>
+      <p>Llena el siguiente formulario para registrar un usuario en el banco.</p>
       <div class="inputGrid">
         <div class="inputRow">
-          <input
-            type="text"
-            id="cui"
-            name="cui"
-            autocomplete="off"
-            placeholder="3773328520115"
-            maxlength="13"
-            minlength="13"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un CUI valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.cui}}
           <label for="cui">Número de CUI o DPI</label>
           {% include "icons/credit-card.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="nit"
-            name="nit"
-            autocomplete="off"
-            placeholder="123456"
-            minlength="5"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un NIT valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.nit}}
           <label for="nit">Número de NIT</label>
           {% include "icons/hash.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            autocomplete="off"
-            placeholder="Nuevo usuario"
-            minlength="3"
-            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.name}}
           <label for="name">Nombre completo</label>
           {% include "icons/user.svg" %}
         </div>
@@ -90,33 +47,12 @@
           {% include "icons/calendar.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            autocomplete="off"
-            placeholder="Nueva persona"
-            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.username}}
           <label for="username">Nombre de usuario</label>
           {% include "icons/mail.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            autocomplete="off"
-            placeholder="50235678555"
-            minlength="5"
-            maxlength="8"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un número valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.phone}}
           <label for="phone">Número de teléfono</label>
           {% include "icons/phone.svg" %}
         </div>
@@ -127,7 +63,7 @@
             name="password"
             autocomplete="off"
             placeholder="Contraseña segura"
-            minlength="8"
+            minlength="2"
             oninvalid="this.setCustomValidity('Este campo es obligatorio')"
             oninput="this.setCustomValidity('')"
             required
@@ -142,7 +78,7 @@
             name="confirm_password"
             autocomplete="off"
             placeholder="Contraseña segura"
-            minlength="8"
+            minlength="2"
             oninvalid="this.setCustomValidity('Este campo es obligatorio')"
             oninput="this.setCustomValidity('')"
             required

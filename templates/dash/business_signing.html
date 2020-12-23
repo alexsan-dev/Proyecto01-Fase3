@@ -6,32 +6,17 @@
     <title>Registrar empresa | Banca Virtual</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/signing.css' %}" />
-    <link
-      rel="shortcut icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
   </head>
   <body>
     <form method="POST">
       {% csrf_token %}
       <h2>Crear usuario empresarial</h2>
-      <p>
-        Llena el siguiente formulario para registrar un usuario en el banco.
-      </p>
+      <p>Llena el siguiente formulario para registrar un usuario en el banco.</p>
       <div class="inputGrid">
         <div class="inputRow">
-          <select
-            id="businessType"
-            name="businessType"
-            autocomplete="off"
-            required
-          >
+          <select id="businessType" name="businessType" autocomplete="off" required>
             <option selected disabled>Seleccionar tipo</option>
             <option value="Sociedad anónima">Sociedad anónima</option>
             <option value="Compañía limitada">Compañía limitada</option>
@@ -42,78 +27,22 @@
           {% include "icons/briefcase.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            autocomplete="off"
-            placeholder="Nueva empresa"
-            minlength="3"
-            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.name}}
           <label for="name">Nombre de la empresa</label>
           {% include "icons/users.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="comercialName"
-            name="comercialName"
-            autocomplete="off"
-            placeholder="MiEmpresa"
-            minlength="3"
-            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.comercialname}}
           <label for="comercialName">Nombre comercial</label>
           {% include "icons/user-plus.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="text"
-            id="agent"
-            name="agent"
-            autocomplete="off"
-            placeholder="Nombre completo"
-            minlength="3"
-            oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.agent}}
           <label for="agent">Representante legal</label>
           {% include "icons/file.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="email"
-            id="agent"
-            name="email"
-            autocomplete="off"
-            placeholder="name@domain.com"
-            oninvalid="this.setCustomValidity('Ingresa un correo valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
-          <label for="email">Correo electrónico</label>
-          {% include "icons/mail.svg" %}
-        </div>
-        <div class="inputRow">
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            autocomplete="off"
-            placeholder="50235678555"
-            minlength="5"
-            maxlength="8"
-            pattern="\d*"
-            oninvalid="this.setCustomValidity('Ingresa un número valido')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
+          {{form.phone}}
           <label for="phone">Número de teléfono</label>
           {% include "icons/phone.svg" %}
         </div>
@@ -124,7 +53,7 @@
             name="password"
             autocomplete="off"
             placeholder="Contraseña segura"
-            minlength="8"
+            minlength="2"
             oninvalid="this.setCustomValidity('Este campo es obligatorio')"
             oninput="this.setCustomValidity('')"
             required
@@ -132,28 +61,11 @@
           <label for="password">Contraseña</label>
           {% include "icons/lock.svg" %}
         </div>
-        <div class="inputRow">
-          <input
-            type="password"
-            id="confirm_password"
-            name="confirm_password"
-            autocomplete="off"
-            placeholder="Contraseña segura"
-            minlength="8"
-            oninvalid="this.setCustomValidity('Este campo es obligatorio')"
-            oninput="this.setCustomValidity('')"
-            required
-          />
-          <label for="confirm_password">Confirmar contraseña</label>
-          {% include "icons/lock.svg" %}
-        </div>
       </div>
 
       <div id="actions">
         <button>
-          <span style="width: 100%; text-align: center"
-            >Registrarse empresa</span
-          >
+          <span style="width: 100%; text-align: center">Registrarse empresa</span>
         </button>
       </div>
     </form>
