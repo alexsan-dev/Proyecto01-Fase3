@@ -239,7 +239,7 @@ def own_transactions(request):
     }
 
     # POST DE TRANSACCION
-    transactions_queries(request, get_accounts, set_query)
+    transactions_queries(request, get_accounts, set_query, fetch_query)
 
     # RENDER
     return renderTemplate_user(request, 'own_transactions', render)
@@ -259,7 +259,7 @@ def third_transactions(request):
     }
 
     # POST DE TRANSACCION
-    transactions_queries(request, get_accounts, set_query)
+    transactions_queries(request, get_accounts, set_query, fetch_query)
 
     return renderTemplate_user(request, 'third_transactions', render)
 

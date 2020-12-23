@@ -76,7 +76,9 @@
               <li>
                 <p>{{account.id}}</p>
                 <p>{{account.type}}</p>
-                <p>{{ account.balance }}</p>
+                <p>
+                  {% if account.isDollar == 1 %} $ {% else %} Q {% endif %} {{ account.balance }}
+                </p>
                 <p>{% if account.isDollar == 1 %} Dollar {% else %} Quetzal {% endif %}</p>
                 <p>
                   <strong

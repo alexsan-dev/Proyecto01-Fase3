@@ -2,7 +2,7 @@ from ..forms import Transactions_Form
 from datetime import datetime
 
 
-def transactions_queries(request, get_accounts, set_query):
+def transactions_queries(request, get_accounts, set_query, fetch_query):
     if request.method == 'POST':
         # OBTENER CUENTAS
         username = request.session['auth']['username']
@@ -30,16 +30,30 @@ def transactions_queries(request, get_accounts, set_query):
 
             # VERIFICAR QUE NO SEA LA MISMA CUENTA
             if originAccount != destAccount:
-                # VERIFICAR SI TIENE EL SALDO
-                if float(current_account['balance']) >= float(amount):
-                    # CREAR TRANSACCION
-                    set_query(
-                        f'INSERT INTO Transactions VALUES (null, {amount}, "{description}", "{date}", {originAccount}, {destAccount}, 0)')
+                # LEER CUENTA DE TERCEROS
+                dest_account = fetch_query(
+                    f'SELECT * FROM Account WHERE id = {destAccount}')
 
-                    # AGREGAR DEBITO A CUENTA
-                    set_query(
-                        f'UPDATE Account SET debit = debit + {float(amount)} WHERE id = {originAccount}')
+                # BUSCAR CUENTA DE DESTINO
+                if dest_account[0]:
 
-                    # AGREGAR CREDITO A OTRA CUENTA
-                    set_query(
-                        f'UPDATE Account SET credit = credit + {float(amount)} WHERE id = {destAccount}')
+                    # VERIFICAR SI TIENE EL SALDO
+                    if float(current_account['balance']) >= float(amount):
+                        # CREAR TRANSACCION
+                        set_query(
+                            f'INSERT INTO Transactions VALUES (null, {amount}, "{description}", "{date}", {originAccount}, {destAccount}, 0)')
+
+                        # AGREGAR DEBITO A CUENTA
+                        total_amount = float(amount)
+                        if str(dest_account[0][6]) == '1' and str(current_account['isDollar']) == '0':
+                            total_amount = float(amount) / 7.87
+                        elif str(dest_account[0][6]) == '0' and str(current_account['isDollar']) == '1':
+                            total_amount = float(amount) * 7.60
+
+                        # AGREGAR DEBITO A CUENTA PROPIA
+                        set_query(
+                            f'UPDATE Account SET debit = debit + {float(amount)} WHERE id = {originAccount}')
+
+                        # AGREGAR CREDITO A OTRA CUENTA
+                        set_query(
+                            f'UPDATE Account SET credit = credit + {total_amount} WHERE id = {destAccount}')
