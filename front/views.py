@@ -269,7 +269,21 @@ def payments(request):
 
 
 def checks(request):
-    return renderTemplate_user(request, 'checks')
+    # OBTENER USUARIO
+    user = get_user(request)
+    cui = user.get('cui', '')
+    userBusiness = user.get('userBusiness', '')
+
+    # CUENTAS
+    accounts = get_accounts(request)
+
+    # OBTENER CHEQUES
+    checks = fetch_query(
+        f'SELECT * FROM Account RIGHT JOIN Accountcheck ON Accountcheck.account = Account.id WHERE userCui = {cui} OR userBusiness = "{userBusiness}"')
+
+    return renderTemplate_user(request, 'checks', {
+        "checks": checks
+    })
 
 
 def loans(request):

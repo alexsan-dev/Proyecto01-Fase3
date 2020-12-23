@@ -23,15 +23,8 @@
           </div>
           <div class="payments_accounts">
             <div class="inputRow">
-              <select
-                id="account"
-                autocomplete="off"
-                required
-                aria-placeholder="Seleccionar cuenta"
-              >
-                <option hidden selected disabled value="Seleccionar cuenta">
-                  Seleccionar cuenta
-                </option>
+              <select id="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
+                <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
                 <option>0000001 Alex Santos</option>
                 <option>0000003 Daniel Valenzuela</option>
                 <option>0000004 Alex Santos</option>
@@ -53,105 +46,41 @@
               <label for="no_check">Número de cheque</label>
               {% include "icons/credit-card.svg" %}
             </div>
-
-            <div class="inputRow">
-              <input
-                type="number"
-                id="amount"
-                autocomplete="off"
-                placeholder="999.99"
-                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
-              <label for="amount">Monto</label>
-              {% include "icons/dollar-sign.svg" %}
-            </div>
-
-            <div class="inputRow">
-              <input
-                type="text"
-                id="name"
-                autocomplete="off"
-                placeholder="Nombre completo"
-                oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
-              <label for="name">Beneficiario</label>
-              {% include "icons/users.svg" %}
-            </div>
           </div>
         </div>
       </div>
       <div class="container">
         <!-- CUENTAS MONETARIAS -->
-        <div class="accounts">
+        <div class="accounts" style="width: 100%">
           <div class="account_container">
             <h2>Historial de <strong>cheques:</strong></h2>
 
             <ul class="accounts_table">
               <li>
-                <strong>Correlativo</strong>
-                <strong>No. cuenta</strong>
+                <strong style="width: 50px">No.</strong>
+                <strong style="width: 150px">Nombre</strong>
+                <strong style="width: 120px">No. cuenta</strong>
                 <strong>Monto</strong>
-                <strong>Estado</strong>
-                <strong>Acciones</strong>
+                <strong style="width: 90px">Estado</strong>
+                <strong style="width: 220px">Fecha de emision</strong>
+                <strong style="width: 220px">Fecha de cobro</strong>
               </li>
+              {% for check in checks %}
               <li>
-                <p><strong>000001</strong></p>
-                <p>83749827349</p>
-                <p>Q321.22</p>
-                <p><strong>Cobrado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
+                <strong style="width: 50px">{{check.9}}</strong>
+                <p style="width: 150px">{{check.10}}</p>
+                <p style="width: 120px">{{check.13}}</p>
+                <p>{% if check.6 == '1' %} $ {% else %} Q {% endif %} {{check.12}}</p>
+                <strong style="width: 90px"
+                  >{% if check.15 == '1' %} Cobrado {% else %} Emitido {% endif %}
+                </strong>
+                <p style="width: 220px">{{check.11}}</p>
+                <p style="width: 220px">{% if check.14 %} {{check.14}} {% else %} Sin fecha de cobro{% endif %}</p>
               </li>
-              <li>
-                <p><strong>000002</strong></p>
-                <p>89237497833</p>
-                <p>Q300.23</p>
-                <p><strong>Autorizado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000003</strong></p>
-                <p>176152525723</p>
-                <p>Q999.24</p>
-                <p><strong>Cobrado</strong></p>
-                <p>
-                  <button>{% include "icons/settings.svg" %}</button>
-                </p>
-              </li>
-              <li>
-                <p><strong>000004</strong></p>
-                <p>83749827349</p>
-                <p>Q321.22</p>
-                <p><strong>Cobrado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000005</strong></p>
-                <p>89237497833</p>
-                <p>Q300.23</p>
-                <p><strong>Autorizado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>000006</strong></p>
-                <p>176152525723</p>
-                <p>Q999.24</p>
-                <p><strong>Cobrado</strong></p>
-                <p>
-                  <button>{% include "icons/settings.svg" %}</button>
-                </p>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
-
-        <img
-          src="{% static 'images/checks.svg' %}"
-          alt="Accounts Illustration"
-        />
       </div>
     </main>
   </body>

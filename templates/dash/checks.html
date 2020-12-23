@@ -17,12 +17,12 @@
       <div class="inputGrid">
         <div class="inputRow">
           {{form.name}}
-          <label for="businessType">Nombre del beneficiario</label>
+          <label for="name">Nombre del beneficiario</label>
           {% include "icons/user.svg" %}
         </div>
         <div class="inputRow">
           {{form.amount}}
-          <label for="name">Monto</label>
+          <label for="amount">Monto</label>
           {% include "icons/dollar-sign.svg" %}
         </div>
         <div class="inputRow">
@@ -45,7 +45,7 @@
             oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
             oninput="this.setCustomValidity('')"
           />
-          <label for="plan">Fecha</label>
+          <label for="date">Fecha</label>
           {% include "icons/calendar.svg" %}
         </div>
       </div>
