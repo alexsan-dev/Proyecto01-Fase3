@@ -6,6 +6,7 @@ import MySQLdb
 from .queries.login import *
 from .queries.transactions import *
 from .queries.accounts import *
+from .queries.checks import *
 
 # FORM MODELS
 from .forms import *
@@ -278,11 +279,13 @@ def checks(request):
     accounts = get_accounts(request)
 
     # OBTENER CHEQUES
+    checks_queries(request, set_query, fetch_query)
     checks = fetch_query(
         f'SELECT * FROM Account RIGHT JOIN Accountcheck ON Accountcheck.account = Account.id WHERE userCui = {cui} OR userBusiness = "{userBusiness}"')
 
     return renderTemplate_user(request, 'checks', {
-        "checks": checks
+        "checks": checks,
+        "accounts": accounts
     })
 
 

@@ -1,3 +1,10 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
 
@@ -6,9 +13,9 @@ class Account(models.Model):
         'Accounttype', models.DO_NOTHING, db_column='id', primary_key=True)
     state = models.IntegerField()
     # Field name made lowercase.
-    enablechecks = models.BooleanField(db_column='enableChecks')
+    enablechecks = models.IntegerField(db_column='enableChecks')
     # Field name made lowercase.
-    issingle = models.BooleanField(db_column='isSingle')
+    issingle = models.IntegerField(db_column='isSingle')
     credit = models.FloatField()
     debit = models.FloatField()
     # Field name made lowercase.
@@ -19,6 +26,7 @@ class Account(models.Model):
     # Field name made lowercase.
     userbusiness = models.ForeignKey(
         'Businessuser', models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
+    checks = models.IntegerField()
 
     class Meta:
         managed = False
@@ -31,6 +39,10 @@ class Accountcheck(models.Model):
     amount = models.FloatField(blank=True, null=True)
     account = models.ForeignKey(
         Account, models.DO_NOTHING, db_column='account')
+    # Field name made lowercase.
+    chargeddate = models.DateField(
+        db_column='chargedDate', blank=True, null=True)
+    charged = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -121,11 +133,14 @@ class Thirdaccount(models.Model):
     userbusiness = models.ForeignKey(
         Businessuser, models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
     # Field name made lowercase.
-    thirdcui = models.CharField(
-        db_column='thirdCui', max_length=13, blank=True, null=True)
+    thirdcui = models.BigIntegerField(
+        db_column='thirdCui', blank=True, null=True)
     # Field name made lowercase.
     thirdbusiness = models.CharField(
         db_column='thirdBusiness', max_length=50, blank=True, null=True)
+    # Field name made lowercase.
+    accounttype = models.CharField(
+        db_column='accountType', max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False

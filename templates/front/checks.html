@@ -13,8 +13,9 @@
     {% include "navigation.html" %}
     <main>
       <div class="title">
-        <div class="inputs_container">
+        <form class="inputs_container" method="POST">
           <div class="payments_services">
+            {% csrf_token %}
             <h2>Pre-autorización</h2>
             <p>
               Aquí puedes realizar la <br />preautorizacion de cheques.
@@ -23,31 +24,35 @@
           </div>
           <div class="payments_accounts">
             <div class="inputRow">
-              <select id="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
+              <select
+                id="account"
+                name="account"
+                autocomplete="off"
+                required
+                aria-placeholder="Seleccionar cuenta"
+              >
                 <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
-                <option>0000001 Alex Santos</option>
-                <option>0000003 Daniel Valenzuela</option>
-                <option>0000004 Alex Santos</option>
+                {% for account in accounts %}
+                <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+                {% endfor %}
               </select>
 
               <label for="account">Cuenta de cheque</label>
               {% include "icons/user.svg" %}
             </div>
             <div class="inputRow">
-              <input
-                type="number"
-                id="no_check"
-                autocomplete="off"
-                placeholder="2938082380"
-                oninvalid="this.setCustomValidity('Ingresa un número de cheque valido')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
-              <label for="no_check">Número de cheque</label>
+              <select id="check" name="check" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
+                <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cheque</option>
+                {% for check in checks %}
+                <option value="{{check.9}}">{{forloop.counter}} {{check.10}}</option>
+                {% endfor %}
+              </select>
+
+              <label for="check">Numero de cheque</label>
               {% include "icons/credit-card.svg" %}
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="container">
         <!-- CUENTAS MONETARIAS -->
@@ -67,10 +72,10 @@
               </li>
               {% for check in checks %}
               <li>
-                <strong style="width: 50px">{{check.9}}</strong>
+                <strong style="width: 50px">{{forloop.counter}}</strong>
                 <p style="width: 150px">{{check.10}}</p>
                 <p style="width: 120px">{{check.13}}</p>
-                <p>{% if check.6 == '1' %} $ {% else %} Q {% endif %} {{check.12}}</p>
+                <p>{% if check.6 == '1' %} $ {% else %} Q {% endif %} {{check.12|floatformat:2}}</p>
                 <strong style="width: 90px"
                   >{% if check.15 == '1' %} Cobrado {% else %} Emitido {% endif %}
                 </strong>

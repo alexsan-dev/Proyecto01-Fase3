@@ -27,5 +27,3 @@ def checks_queries(request, set_query, accounts):
                 # QUERIES
                 set_query(
                     f'INSERT INTO AccountCheck VALUES (null, "{name}", "{date}", {amount}, {req_account}, null, 0)')
-                set_query(
-                    f'UPDATE Account set debit = debit + {amount} WHERE id = {req_account}')
