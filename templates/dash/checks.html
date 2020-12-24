@@ -16,11 +16,6 @@
       <p>Llena el siguiente formulario para crear un nuevo cheque.</p>
       <div class="inputGrid">
         <div class="inputRow">
-          {{form.name}}
-          <label for="name">Nombre del beneficiario</label>
-          {% include "icons/user.svg" %}
-        </div>
-        <div class="inputRow">
           {{form.amount}}
           <label for="amount">Monto</label>
           {% include "icons/dollar-sign.svg" %}
@@ -35,18 +30,6 @@
 
           <label for="account">Cuenta</label>
           {% include "icons/book-open.svg" %}
-        </div>
-        <div class="inputRow">
-          <input
-            type="date"
-            id="date"
-            name="date"
-            autocomplete="off"
-            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
-            oninput="this.setCustomValidity('')"
-          />
-          <label for="date">Fecha</label>
-          {% include "icons/calendar.svg" %}
         </div>
       </div>
 

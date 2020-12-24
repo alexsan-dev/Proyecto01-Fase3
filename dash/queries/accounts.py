@@ -49,4 +49,4 @@ def set_accounts_queries(request, set_query):
 
             # INSERTAR EN CUENTA
             set_query(
-                f'INSERT INTO Account VALUES ({accountId}, 1, 0, {isSingle}, 0, 0, {isDollar}, {userCui}, {userBusiness}, 15); ')
+                f'INSERT INTO Account VALUES ({accountId}, 1, 0, {isSingle}, 0, 0, {isDollar}, {userCui}, {userBusiness}, 15, 0); ')

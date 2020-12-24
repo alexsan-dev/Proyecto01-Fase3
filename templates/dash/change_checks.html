@@ -12,18 +12,13 @@
   <body>
     <form method="POST">
       {% csrf_token %}
-      <h2>Agregar a chequera</h2>
-      <p>Llena el siguiente formulario para crear un nuevo cheque.</p>
+      <h2>Cobrar cheques</h2>
+      <p>Llena el siguiente formulario para cobrar un cheque.</p>
       <div class="inputGrid">
-        <div class="inputRow">
+      <div class="inputRow">
           {{form.name}}
-          <label for="name">Nombre del beneficiario</label>
+          <label for="account">Nombre</label>
           {% include "icons/user.svg" %}
-        </div>
-        <div class="inputRow">
-          {{form.amount}}
-          <label for="amount">Monto</label>
-          {% include "icons/dollar-sign.svg" %}
         </div>
         <div class="inputRow">
           <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
@@ -37,22 +32,22 @@
           {% include "icons/book-open.svg" %}
         </div>
         <div class="inputRow">
-          <input
-            type="date"
-            id="date"
-            name="date"
-            autocomplete="off"
-            oninvalid="this.setCustomValidity('Ingresa una fecha valida')"
-            oninput="this.setCustomValidity('')"
-          />
-          <label for="date">Fecha</label>
-          {% include "icons/calendar.svg" %}
+          <select id="check" name="check" autocomplete="off" required aria-placeholder="Seleccionar cheque">
+            <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cheque</option>
+            {% for check in checks %}
+            <option value="{{check.0}}">{{check.0}} {{check.1}}</option>
+            {% endfor %}
+          </select>
+
+          <label for="account">Cheque</label>
+          {% include "icons/check-square.svg" %}
         </div>
+      </div>
       </div>
 
       <div id="actions">
         <button>
-          <span style="width: 100%; text-align: center">Agregar cheque</span>
+          <span style="width: 100%; text-align: center">Cobrar cheque</span>
         </button>
       </div>
     </form>

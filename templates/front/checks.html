@@ -60,9 +60,9 @@
             <div class="inputRow">
               <select id="check" name="check" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
                 <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cheque</option>
-                {% for check in checks %}
-                <option value="{{check.9}}">{{forloop.counter}} {{check.10}}</option>
-                {% endfor %}
+                {% for check in checks %} {% if check.17 == 0 %}
+                <option value="{{check.11}}">No. {{forloop.counter}} - {{check.13}}</option>
+                {% endif %} {% endfor %}
               </select>
 
               <label for="check">Numero de cheque</label>
@@ -126,14 +126,12 @@
               {% for check in checks %}
               <li>
                 <strong style="width: 50px">{{forloop.counter}}</strong>
-                <p style="width: 150px">{{check.10}}</p>
-                <p style="width: 120px">{{check.13}}</p>
-                <p>{% if check.6 == '1' %} $ {% else %} Q {% endif %} {{check.12|floatformat:2}}</p>
-                <strong style="width: 90px"
-                  >{% if check.15 == '1' %} Cobrado {% else %} Emitido {% endif %}
-                </strong>
-                <p style="width: 220px">{{check.11}}</p>
-                <p style="width: 220px">{% if check.14 %} {{check.14}} {% else %} Sin fecha de cobro{% endif %}</p>
+                <p style="width: 150px">{{check.12}}</p>
+                <p style="width: 120px">{{check.15}}</p>
+                <p>{% if check.6 == 1 %} $ {% else %} Q {% endif %} {{check.14|floatformat:2}}</p>
+                <strong style="width: 90px">{% if check.17 == 1 %} Cobrado {% else %} Emitido {% endif %} </strong>
+                <p style="width: 220px">{{check.13}}</p>
+                <p style="width: 220px">{% if check.16 %} {{check.16}} {% else %} Sin fecha de cobro{% endif %}</p>
               </li>
               {% endfor %}
             </ul>

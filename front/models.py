@@ -19,6 +19,7 @@ class Account(models.Model):
     usercui = models.ForeignKey('Singleuser', models.DO_NOTHING, db_column='userCui', blank=True, null=True)  # Field name made lowercase.
     userbusiness = models.ForeignKey('Businessuser', models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)  # Field name made lowercase.
     checks = models.IntegerField()
+    enableauthchecks = models.IntegerField(db_column='enableAuthChecks')  # Field name made lowercase.
 
     class Meta:
         managed = False

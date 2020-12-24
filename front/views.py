@@ -294,7 +294,15 @@ def loans(request):
 
 
 def states(request):
-    return renderTemplate_user(request, 'states')
+    # CUENTAS
+    accounts = get_accounts(request)
+
+    # QUERIES
+    auth_checks_queries(request, set_query, fetch_query)
+
+    return renderTemplate_user(request, 'states', {
+        "accounts": accounts
+    })
 
 
 def spreads(request):

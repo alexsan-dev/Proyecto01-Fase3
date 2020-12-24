@@ -27,6 +27,8 @@ class Account(models.Model):
     userbusiness = models.ForeignKey(
         'Businessuser', models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
     checks = models.IntegerField()
+    # Field name made lowercase.
+    enableauthchecks = models.IntegerField(db_column='enableAuthChecks')
 
     class Meta:
         managed = False

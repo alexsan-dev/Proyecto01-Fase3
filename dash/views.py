@@ -162,5 +162,19 @@ def checks(request):
 
 def change_checks(request):
     # FORMULARIO INICIAL
+    form = Charge_Change_Form()
+
+    # FORMULARIO INICIAL
     accounts = get_accounts()
-    return render_template(request, 'change_checks')
+    checks = fetch_query(
+        f'SELECT * FROM AccountCheck WHERE charged = 0')
+
+    # QUERIES
+    change_checks_queries(request, set_query, fetch_query)
+
+    # TEMPLATE
+    return render_template(request, 'change_checks', {
+        "accounts": accounts,
+        "checks": checks,
+        "form": form
+    })

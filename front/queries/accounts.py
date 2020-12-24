@@ -26,13 +26,13 @@ def accounts_queries(request, fetch_query, set_query, user):
                     valid_type = False
 
                     # VERIFICAR EL TIPO DE CUENTA
-                    if account_type == 'Ahorro' and third_account[0][10] == account_id:
+                    if account_type == 'Ahorro' and third_account[0][12] == account_id:
                         valid_type = True
 
-                    elif account_type == 'Plazo fijo' and third_account[0][11] == account_id:
+                    elif account_type == 'Plazo fijo' and third_account[0][13] == account_id:
                         valid_type = True
 
-                    elif third_account[0][12] == account_id:
+                    elif third_account[0][14] == account_id:
                         valid_type = True
 
                     if valid_type:
@@ -44,5 +44,6 @@ def accounts_queries(request, fetch_query, set_query, user):
                         userCui = userCui if len(str(userCui)) > 0 else "null"
 
                         # INSERTAR CUENTA DE TERCEROS
+
                         set_query(
                             f'INSERT INTO ThirdAccount VALUES ({account_id}, {userCui}, {userBusiness}, {third_userCui}, {third_userBusiness}, "{account_type}"); ')
