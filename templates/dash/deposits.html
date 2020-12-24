@@ -16,12 +16,20 @@
       <p>Llena el siguiente formulario para depositar en cuenta.</p>
       <div class="inputGrid">
         <div class="inputRow">
-          <input type="number" id="credit" name="credit" />
+          <input style="padding-left: 80px" type="number" id="credit" name="credit" />
+          <select id="credit_type" name="credit_type" style="position: absolute; width: 30px">
+            <option selected value="Quetzal">Quetzal</option>
+            <option value="Dollar">Dollar</option>
+          </select>
           <label for="credit">Credito</label>
           {% include "icons/dollar-sign.svg" %}
         </div>
         <div class="inputRow">
-          <input type="number" id="debit" name="debit" value="0" />
+          <input style="padding-left: 80px" type="number" id="debit" name="debit" value="0" />
+          <select id="debit_type" name="debit_type" style="position: absolute; width: 30px">
+            <option selected value="Quetzal">Quetzal</option>
+            <option value="Dollar">Dollar</option>
+          </select>
           <label for="debit">Debito</label>
           {% include "icons/dollar-sign.svg" %}
         </div>
@@ -29,7 +37,9 @@
           <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
             <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
             {% for account in accounts %}
-            <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+            <option value="{{account.id}}">
+              {{account.id}} {{account.type}} {% if account.isDollar == 1 %} Dollar {% else %} Quetzal {% endif %}
+            </option>
             {% endfor %}
           </select>
 

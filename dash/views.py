@@ -186,7 +186,7 @@ def deposits(request):
     accounts = get_accounts()
 
     # QUERIES
-    deposits_queries(request, set_query)
+    deposits_queries(request, set_query, fetch_query)
 
     return render_template(request, 'deposits', {
         "accounts": accounts
