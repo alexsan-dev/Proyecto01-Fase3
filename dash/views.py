@@ -5,6 +5,7 @@ import MySQLdb
 from .queries.accounts import *
 from .queries.checks import *
 from .queries.signing import *
+from .queries.deposits import *
 
 # FORM MODELS
 from .forms import *
@@ -177,4 +178,16 @@ def change_checks(request):
         "accounts": accounts,
         "checks": checks,
         "form": form
+    })
+
+
+def deposits(request):
+    # CUENTAS
+    accounts = get_accounts()
+
+    # QUERIES
+    deposits_queries(request, set_query)
+
+    return render_template(request, 'deposits', {
+        "accounts": accounts
     })
