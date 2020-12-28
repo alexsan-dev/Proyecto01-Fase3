@@ -12,154 +12,131 @@
   <body>
     {% include "navigation.html" %}
     <main>
-      <div class="title">
-        <div class="inputs_container">
+      <div class="title" style="position: relative">
+        <form class="inputs_container" method="POST" onsubmit="return preventSubmit()">
           <div class="payments_services">
             <h2>Pago de planilla</h2>
             <p>
               Aquí puedes realizar el pago<br />
               a empleados o proveedores.
-              <button>
-                {% include "icons/dollar-sign.svg" %} Realizar pago
-              </button>
+              <button onclick="confirmPassword()">{% include "icons/dollar-sign.svg" %} Realizar pago</button>
             </p>
           </div>
-          <div class="payments_accounts">
+          <div class="payments_accounts" method="POST">
+            {% csrf_token %}
             <div class="inputRow">
               <select
-                id="from_account"
+                id="account"
+                name="account"
                 autocomplete="off"
                 required
                 aria-placeholder="Seleccionar cuenta"
               >
-                <option hidden selected disabled value="Seleccionar cuenta">
-                  Seleccionar cuenta
-                </option>
-                <option>0000001 Alex Santos</option>
-                <option>0000003 Daniel Valenzuela</option>
-                <option>0000004 Alex Santos</option>
+                <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
+                {% for account in accounts %}
+                <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+                {% endfor %}
               </select>
 
-              <label for="from_account">Cuenta a debitar</label>
+              <label for="account">Cuenta a debitar</label>
               {% include "icons/user.svg" %}
             </div>
             <div class="inputRow">
-              <select
-                id="pay_type"
-                autocomplete="off"
-                required
-                aria-placeholder="Seleccionar persona"
-              >
-                <option hidden selected disabled value="Seleccionar persona">
-                  Seleccionar persona
-                </option>
-                <option>Empleado</option>
-                <option>Proveedor</option>
-              </select>
+              {{form.ismensualpayplan}}
 
-              <label for="pay_type">Empleado o proveedor</label>
-              {% include "icons/users.svg" %}
+              <label for="ismensualpayplan">Mensual<span>Plan de pago</span></label>
             </div>
 
             <div class="inputRow">
-              <input
-                type="number"
-                id="amount"
-                autocomplete="off"
-                placeholder="999.99"
-                oninvalid="this.setCustomValidity('Ingresa un monto valido')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
+              {{form.amount}}
+
               <label for="amount">Monto</label>
               {% include "icons/dollar-sign.svg" %}
             </div>
 
             <div class="inputRow">
-              <input
-                type="number"
-                id="to_account"
-                autocomplete="off"
-                placeholder="9823872328"
-                oninvalid="this.setCustomValidity('Ingresa una cuenta valida')"
-                oninput="this.setCustomValidity('')"
-                required
-              />
-              <label for="to_account">No. Cuenta</label>
+              {{form.employaccount}}
+
+              <label for="employaccount">No. Cuenta</label>
               {% include "icons/hash.svg" %}
             </div>
+
+            <div class="inputRow">
+              {{form.employname}}
+
+              <label for="employname">Nombre de empleado</label>
+              {% include "icons/user-plus.svg" %}
+            </div>
           </div>
-        </div>
+        </form>
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          style="position: absolute; width: 230px; right: 20px; bottom: -35px"
+        >
+          {% csrf_token %}
+          <div class="inputRow">
+            <input
+              type="file"
+              id="csv"
+              name="csv"
+              autocomplete="off"
+              placeholder="Subir planilla"
+              oninvalid="this.setCustomValidity('Ingresa una cuenta valida')"
+              oninput="this.setCustomValidity('')"
+              style="display: none"
+            />
+            <label for="csv">Subir CSV</label>
+            {% include "icons/archive.svg" %}
+          </div>
+          <button style="position: relative; top: -15px">Subir pagos</button>
+        </form>
       </div>
       <div class="container">
         <!-- CUENTAS MONETARIAS -->
         <div class="accounts">
           <div class="account_container">
-            <h2>Historial de <strong>cheques:</strong></h2>
+            <h2>Historial de <strong>pagos:</strong></h2>
 
             <ul class="accounts_table">
               <li>
-                <strong>Código</strong>
-                <strong>No. cuenta</strong>
+                <strong>Cta. Empleado</strong>
+                <strong>Nombre empleado</strong>
                 <strong>Monto</strong>
-                <strong>Tipo</strong>
-                <strong>Acciones</strong>
+                <strong>No. Cuenta</strong>
+                <strong>Plan</strong>
               </li>
+              {% for spread in spreads %}
               <li>
-                <p><strong>F7H82H3</strong></p>
-                <p>83749827349</p>
-                <p>Q3250.22</p>
-                <p><strong>Empleado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
+                <p>{{spread.1}}</p>
+                <p>{{spread.2}}</p>
+                <strong> {% if spread.13 == 1 %} $ {% else %} Q {% endif %} {{spread.3|floatformat:2}}</strong>
+                <p>{{spread.6}}</p>
+                <p>{% if spread.4 == 1 %}Mensual {% else %}Quincenal {% endif %}</p>
               </li>
-              <li>
-                <p><strong>873G4734</strong></p>
-                <p>89237497833</p>
-                <p>Q6823.23</p>
-                <p><strong>Proveedor</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>4884HSS</strong></p>
-                <p>176152525723</p>
-                <p>Q89328.24</p>
-                <p><strong>Empleado</strong></p>
-                <p>
-                  <button>{% include "icons/settings.svg" %}</button>
-                </p>
-              </li>
-              <li>
-                <p><strong>F7H82H3</strong></p>
-                <p>83749827349</p>
-                <p>Q3250.22</p>
-                <p><strong>Empleado</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>873G4734</strong></p>
-                <p>89237497833</p>
-                <p>Q6823.23</p>
-                <p><strong>Proveedor</strong></p>
-                <p><button>{% include "icons/settings.svg" %}</button></p>
-              </li>
-              <li>
-                <p><strong>4884HSS</strong></p>
-                <p>176152525723</p>
-                <p>Q89328.24</p>
-                <p><strong>Empleado</strong></p>
-                <p>
-                  <button>{% include "icons/settings.svg" %}</button>
-                </p>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
 
-        <img
-          src="{% static 'images/spreads.svg' %}"
-          alt="Accounts Illustration"
-        />
+        <img src="{% static 'images/spreads.svg' %}" alt="Accounts Illustration" />
       </div>
     </main>
+    <script>
+      // GLOBALES
+      let password = "{{user.password}}";
+      let send = false;
+
+      // PROMPT DE CONTRA
+      const confirmPassword = () => {
+        let inputPass = prompt("Ingresa tu contraseña para continuar");
+        if (inputPass === password) send = true;
+      };
+
+      // EVITAR QUE ENVIE
+      const preventSubmit = (ev) => {
+        return send;
+      };
+    </script>
   </body>
 </html>

@@ -7,6 +7,7 @@ from .queries.login import *
 from .queries.transactions import *
 from .queries.accounts import *
 from .queries.checks import *
+from .queries.spreads import *
 
 # FORM MODELS
 from .forms import *
@@ -306,4 +307,24 @@ def states(request):
 
 
 def spreads(request):
-    return renderTemplate_user(request, 'spreads')
+    # CUENTAS
+    accounts = get_accounts(request)
+    user = get_user(request)
+
+    # PLANILLAS
+    spreads = fetch_query(
+        f'SELECT * FROM SpreadsPay LEFT JOIN Account ON SpreadsPay.account = Account.id WHERE SpreadsPay.userBusiness = "{user["comercialName"]}"')
+
+    # FORMULARIO INICIAL
+    form = Spreads_Form()
+    render = {
+        "form": form,
+        "accounts": accounts,
+        "spreads": spreads,
+        "user": user
+    }
+
+    # QUERIES
+    spreads_queries(request, user, set_query, fetch_query, accounts)
+
+    return renderTemplate_user(request, 'spreads', render)
