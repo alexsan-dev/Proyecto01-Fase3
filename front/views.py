@@ -274,8 +274,8 @@ def payments(request):
 def checks(request):
     # OBTENER USUARIO
     user = get_user(request)
-    cui = user.get('cui', '')
-    userBusiness = user.get('userBusiness', '')
+    cui = user.get('cui', 0)
+    userBusiness = user.get('comercialName', '')
 
     # CUENTAS
     accounts = get_accounts(request)
@@ -295,16 +295,26 @@ def loans(request):
     # FORMULARIO
     form = Loans_Form()
     user = get_user(request)
+    accounts = get_accounts(request)
+    cui = user.get('cui', 0)
+    userBusiness = user.get('comercialName', '')
+
+    loans = fetch_query(
+        f'SELECT * FROM LoanQuotas INNER JOIN Loans WHERE LoanQuotas.loan = Loans.id AND LoanQuotas.payDate is null AND Loans.userBusiness = "{userBusiness}" OR Loans.userCui = {cui}')
 
     # VARIABLES
     render = {
+        "user": user,
         "form": form,
-        "quotas": None
+        "quotas": None,
+        "accounts": accounts,
+        "loans": loans
     }
 
     # QUERIES
     if request.method == 'POST':
         render = loans_queries(request, set_query, fetch_query, render, user)
+        loan_quotas_queries(request, set_query, fetch_query)
 
     return renderTemplate_user(request, 'loans', render)
 

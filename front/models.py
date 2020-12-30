@@ -98,7 +98,7 @@ class Loanquotas(models.Model):
     date = models.DateField()
     # Field name made lowercase.
     paydate = models.DateField(db_column='payDate', blank=True, null=True)
-    amount = models.IntegerField(blank=True, null=True)
+    amount = models.FloatField(blank=True, null=True)
     account = models.ForeignKey(
         Account, models.DO_NOTHING, db_column='account', blank=True, null=True)
 
@@ -108,7 +108,7 @@ class Loanquotas(models.Model):
 
 
 class Loans(models.Model):
-    amount = models.IntegerField()
+    amount = models.FloatField()
     plan = models.IntegerField()
     interest = models.IntegerField()
     description = models.TextField()
@@ -198,6 +198,23 @@ class Spreadspay(models.Model):
         db_table = 'SpreadsPay'
 
 
+class Cards(models.Model):
+    id = models.IntegerField(primary_key=True)
+    brand = models.CharField(max_length=50, blank=True, null=True)
+    # Field name made lowercase.
+    cashlimit = models.IntegerField(db_column='cashLimit')
+    # Field name made lowercase.
+    usercui = models.ForeignKey(
+        'Singleuser', models.DO_NOTHING, db_column='userCui', blank=True, null=True)
+    # Field name made lowercase.
+    userbusiness = models.ForeignKey(
+        Businessuser, models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Cards'
+
+
 class Thirdaccount(models.Model):
     id = models.CharField(primary_key=True, max_length=6)
     # Field name made lowercase.
@@ -246,3 +263,23 @@ class Transactions(models.Model):
     class Meta:
         managed = False
         db_table = 'Transactions'
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'

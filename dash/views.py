@@ -207,3 +207,7 @@ def loans(request):
     loans_queries(request, set_query, fetch_query)
 
     return render_template(request, 'loans', render)
+
+
+def cards(request):
+    return render_template(request, 'cards')
