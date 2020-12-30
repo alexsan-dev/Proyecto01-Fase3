@@ -20,4 +20,11 @@ class Spreads_Form(forms.ModelForm):
 
     class Meta:
         model = Spreadspay
-        fields = ('employaccount', 'employname', 'amount', 'ismensualpayplan')
+        fields = ('payaccount', 'payname', 'amount', 'ismensualpayplan')
+
+
+class Loans_Form(forms.ModelForm):
+
+    class Meta:
+        model = Loans
+        fields = ('amount', 'description')

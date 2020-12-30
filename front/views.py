@@ -8,6 +8,7 @@ from .queries.transactions import *
 from .queries.accounts import *
 from .queries.checks import *
 from .queries.spreads import *
+from .queries.loans import *
 
 # FORM MODELS
 from .forms import *
@@ -158,9 +159,9 @@ def get_accounts(request):
 
         # CALCULAR DICCIONARIO
         tmpType = "Monetaria"
-        if tmpAccount[10]:
+        if tmpAccount[12]:
             tmpType = "Ahorro"
-        elif tmpAccount[11]:
+        elif tmpAccount[13]:
             tmpType = 'Plazo fijo'
 
         # CREAR DICCIONARIO
@@ -291,7 +292,21 @@ def checks(request):
 
 
 def loans(request):
-    return renderTemplate_user(request, 'loans')
+    # FORMULARIO
+    form = Loans_Form()
+    user = get_user(request)
+
+    # VARIABLES
+    render = {
+        "form": form,
+        "quotas": None
+    }
+
+    # QUERIES
+    if request.method == 'POST':
+        render = loans_queries(request, set_query, fetch_query, render, user)
+
+    return renderTemplate_user(request, 'loans', render)
 
 
 def states(request):

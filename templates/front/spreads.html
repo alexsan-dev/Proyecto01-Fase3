@@ -14,6 +14,7 @@
     <main>
       <div class="title" style="position: relative">
         <form class="inputs_container" method="POST" onsubmit="return preventSubmit()">
+          <input type="checkbox" name="isProvider" id="isProvider" style="display: none" />
           <div class="payments_services">
             <h2>Pago de planilla</h2>
             <p>
@@ -55,16 +56,16 @@
             </div>
 
             <div class="inputRow">
-              {{form.employaccount}}
+              {{form.payaccount}}
 
               <label for="employaccount">No. Cuenta</label>
               {% include "icons/hash.svg" %}
             </div>
 
             <div class="inputRow">
-              {{form.employname}}
+              {{form.payname}}
 
-              <label for="employname">Nombre de empleado</label>
+              <label for="employname">Nombre</label>
               {% include "icons/user-plus.svg" %}
             </div>
           </div>
@@ -100,8 +101,8 @@
 
             <ul class="accounts_table">
               <li>
-                <strong>Cta. Empleado</strong>
-                <strong>Nombre empleado</strong>
+                <strong>Cta. Pago</strong>
+                <strong>Nombre</strong>
                 <strong>Monto</strong>
                 <strong>No. Cuenta</strong>
                 <strong>Plan</strong>
@@ -124,16 +125,21 @@
     </main>
     <script>
       // GLOBALES
+      const isProvider = document.getElementById("isProvider");
       let password = "{{user.password}}";
       let send = false;
 
       // PROMPT DE CONTRA
       const confirmPassword = () => {
         let inputPass = prompt("Ingresa tu contraseña para continuar");
+        let providerPrompt = prompt("¿Es un pago de proveedor?");
+
         if (inputPass === password) send = true;
+        if (providerPrompt === "Si") isProvider.checked = true;
+        else isProvider.checked = false;
       };
 
-      // EVITAR QUE ENVIE
+      // EVITAR ENVIÓ
       const preventSubmit = (ev) => {
         return send;
       };

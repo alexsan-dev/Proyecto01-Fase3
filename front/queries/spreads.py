@@ -6,9 +6,14 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
         # FORMULARIO
         form = Spreads_Form(data=request.POST)
 
-        def insert_pay(req_account, isMensualPayPlan, amount, employAccount, employName):
+        def insert_pay(req_account, isMensualPayPlan, amount, payAccount, payName):
             # NOMBRE DE EMPRESA
             userBusiness = user.get('comercialName', '')
+            isProvider = request.POST.get('isProvider', '0').replace('on', '1')
+            isProvider = isProvider == '1'
+
+            # NOMBRE DE TABLA
+            tableName = "ProvidersPay" if isProvider else "SpreadsPay"
 
             # CUENTA
             current_account = None
@@ -18,7 +23,7 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
 
             # SELECCIONAR PAGO
             prevPay = fetch_query(
-                f'SELECT * FROM SpreadsPay WHERE employAccount = {employAccount}')
+                f'SELECT * FROM {tableName} WHERE payAccount = {payAccount}')
 
             if current_account:
                 if float(str(current_account['balance'])) >= float(str(amount)):
@@ -30,13 +35,13 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
                     if prevPay and prevPay[0]:
                         # UPDATE
                         set_query(
-                            f'UPDATE SpreadsPay SET amount = {amount}, isMensualPayPlan = {isMensualPayPlan} WHERE employAccount = {employAccount}')
+                            f'UPDATE {tableName} SET amount = {amount}, isMensualPayPlan = {isMensualPayPlan} WHERE payAccount = {payAccount}')
                         debit_from()
 
                     else:
                         # INSERT
                         set_query(
-                            f'INSERT INTO SpreadsPay VALUES (null, {employAccount}, "{employName}", {amount}, {isMensualPayPlan}, "{userBusiness}", {req_account})')
+                            f'INSERT INTO {tableName} VALUES (null, {payAccount}, "{payName}", {amount}, {isMensualPayPlan}, "{userBusiness}", {req_account})')
                         debit_from()
 
         # ARCHIVO
@@ -56,12 +61,12 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
                     file_account = cols[0]
                     file_amount = cols[1]
                     file_mensual = cols[2]
-                    file_empAccount = cols[3]
-                    file_empName = cols[4]
+                    file_payAccount = cols[3]
+                    file_payName = cols[4]
 
                     # ACTUALIZAR
                     insert_pay(file_account, file_mensual, file_amount,
-                               file_empAccount, file_empName)
+                               file_payAccount, file_payName)
 
                 col_counter += 1
 
@@ -74,9 +79,9 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
             isMensualPayPlan = data.get('ismensualpayplan', False)
             isMensualPayPlan = '1' if isMensualPayPlan else '0'
             amount = data.get('amount', 0)
-            employAccount = data.get('employaccount', '')
-            employName = data.get('employname', '')
+            payAccount = data.get('payaccount', '')
+            payName = data.get('payname', '')
 
             # PAGAR
             insert_pay(account, isMensualPayPlan, amount,
-                       employAccount, employName)
+                       payAccount, payName)

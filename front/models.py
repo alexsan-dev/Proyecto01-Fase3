@@ -19,7 +19,7 @@ class Account(models.Model):
     credit = models.FloatField()
     debit = models.FloatField()
     # Field name made lowercase.
-    isdollar = models.IntegerField(db_column='isDollar')
+    isdollar = models.BooleanField(db_column='isDollar')
     # Field name made lowercase.
     usercui = models.ForeignKey(
         'Singleuser', models.DO_NOTHING, db_column='userCui', blank=True, null=True)
@@ -93,6 +93,40 @@ class Businessuser(models.Model):
         db_table = 'BusinessUser'
 
 
+class Loanquotas(models.Model):
+    loan = models.ForeignKey('Loans', models.DO_NOTHING, db_column='loan')
+    date = models.DateField()
+    # Field name made lowercase.
+    paydate = models.DateField(db_column='payDate', blank=True, null=True)
+    amount = models.IntegerField(blank=True, null=True)
+    account = models.ForeignKey(
+        Account, models.DO_NOTHING, db_column='account', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'LoanQuotas'
+
+
+class Loans(models.Model):
+    amount = models.IntegerField()
+    plan = models.IntegerField()
+    interest = models.IntegerField()
+    description = models.TextField()
+    # Field name made lowercase.
+    canceledquotas = models.IntegerField(db_column='canceledQuotas')
+    authorized = models.IntegerField()
+    # Field name made lowercase.
+    usercui = models.ForeignKey(
+        'Singleuser', models.DO_NOTHING, db_column='userCui', blank=True, null=True)
+    # Field name made lowercase.
+    userbusiness = models.ForeignKey(
+        Businessuser, models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Loans'
+
+
 class Monetaryaccount(models.Model):
     id = models.CharField(primary_key=True, max_length=6)
     description = models.CharField(max_length=50, blank=True, null=True)
@@ -100,6 +134,25 @@ class Monetaryaccount(models.Model):
     class Meta:
         managed = False
         db_table = 'MonetaryAccount'
+
+
+class Providerspay(models.Model):
+    # Field name made lowercase.
+    payaccount = models.CharField(db_column='payAccount', max_length=6)
+    # Field name made lowercase.
+    payname = models.CharField(db_column='payName', max_length=20)
+    amount = models.FloatField(blank=True, null=True)
+    # Field name made lowercase.
+    ismensualpayplan = models.BooleanField(db_column='isMensualPayPlan')
+    # Field name made lowercase.
+    userbusiness = models.ForeignKey(
+        Businessuser, models.DO_NOTHING, db_column='userBusiness', blank=True, null=True)
+    account = models.ForeignKey(
+        Account, models.DO_NOTHING, db_column='account')
+
+    class Meta:
+        managed = False
+        db_table = 'ProvidersPay'
 
 
 class Savingaccount(models.Model):
@@ -128,9 +181,9 @@ class Singleuser(models.Model):
 
 class Spreadspay(models.Model):
     # Field name made lowercase.
-    employaccount = models.CharField(db_column='employAccount', max_length=6)
+    payaccount = models.CharField(db_column='payAccount', max_length=6)
     # Field name made lowercase.
-    employname = models.CharField(db_column='employName', max_length=20)
+    payname = models.CharField(db_column='payName', max_length=20)
     amount = models.FloatField(blank=True, null=True)
     # Field name made lowercase.
     ismensualpayplan = models.BooleanField(db_column='isMensualPayPlan')

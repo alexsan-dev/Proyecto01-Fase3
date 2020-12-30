@@ -1,0 +1,38 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aceptar prestamos | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+  </head>
+  <body>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Aceptar prestamos</h2>
+      <p>Llena el siguiente formulario para aceptar un prestamo.</p>
+      <div class="inputGrid">
+        <div class="inputRow">
+          <select id="loan" name="loan" autocomplete="off" required aria-placeholder="Seleccionar prestamo">
+            <option hidden selected disabled value="Seleccionar prestamo">Seleccionar prestamo</option>
+            {% for loan in loans %}
+            <option value="{{loan.0}}">Q{{loan.1}} - Pagos: {{loan.2}}</option>
+            {% endfor %}
+          </select>
+
+          <label for="account">Prestamos</label>
+          {% include "icons/book.svg" %}
+        </div>
+      </div>
+
+      <div id="actions">
+        <button>
+          <span style="width: 100%; text-align: center">Aceptar prestamo</span>
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

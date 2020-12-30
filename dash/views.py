@@ -6,6 +6,7 @@ from .queries.accounts import *
 from .queries.checks import *
 from .queries.signing import *
 from .queries.deposits import *
+from .queries.loans import *
 
 # FORM MODELS
 from .forms import *
@@ -191,3 +192,18 @@ def deposits(request):
     return render_template(request, 'deposits', {
         "accounts": accounts
     })
+
+
+def loans(request):
+    # PRESTAMOS
+    req_loans = fetch_query(f'SELECT * FROM Loans WHERE authorized = 0')
+
+    # VARIABLES
+    render = {
+        "loans": req_loans
+    }
+
+    # QUERIES
+    loans_queries(request, set_query, fetch_query)
+
+    return render_template(request, 'loans', render)
