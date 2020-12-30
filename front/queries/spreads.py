@@ -1,10 +1,11 @@
 from ..forms import Spreads_Form
 
 
-def spreads_queries(request, user, set_query, fetch_query, accounts):
+def spreads_queries(request, user, set_query, fetch_query):
     if request.method == 'POST':
         # FORMULARIO
         form = Spreads_Form(data=request.POST)
+        account = request.POST.get('account', '')
 
         def insert_pay(req_account, isMensualPayPlan, amount, payAccount, payName):
             # NOMBRE DE EMPRESA
@@ -16,17 +17,20 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
             tableName = "ProvidersPay" if isProvider else "SpreadsPay"
 
             # CUENTA
-            current_account = None
-            for user_account in accounts:
-                if user_account['id'] == req_account:
-                    current_account = user_account
+            current_account = fetch_query(
+                f'SELECT * FROM Account WHERE id = {req_account}')
 
             # SELECCIONAR PAGO
             prevPay = fetch_query(
                 f'SELECT * FROM {tableName} WHERE payAccount = {payAccount}')
+            pay_account = fetch_query(
+                f'SELECT * FROM Account WHERE id = {payAccount}')
 
-            if current_account:
-                if float(str(current_account['balance'])) >= float(str(amount)):
+            if current_account and current_account[0] and len(pay_account) > 0:
+                current_account_balance = float(
+                    current_account[0][4]) - float(current_account[0][5])
+
+                if current_account_balance >= float(str(amount)):
                     # DEBIT DE LA CUENTA
                     def debit_from():
                         set_query(
@@ -58,14 +62,12 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
                 cols = row.split(',')
 
                 if col_counter > 0:
-                    file_account = cols[0]
-                    file_amount = cols[1]
-                    file_mensual = cols[2]
-                    file_payAccount = cols[3]
-                    file_payName = cols[4]
+                    file_payName = cols[0]
+                    file_payAccount = cols[1]
+                    file_amount = cols[2]
 
                     # ACTUALIZAR
-                    insert_pay(file_account, file_mensual, file_amount,
+                    insert_pay(account, 1, file_amount,
                                file_payAccount, file_payName)
 
                 col_counter += 1
@@ -75,7 +77,6 @@ def spreads_queries(request, user, set_query, fetch_query, accounts):
             data = form.cleaned_data
 
             # VARIABLES
-            account = request.POST.get('account', '')
             isMensualPayPlan = data.get('ismensualpayplan', False)
             isMensualPayPlan = '1' if isMensualPayPlan else '0'
             amount = data.get('amount', 0)

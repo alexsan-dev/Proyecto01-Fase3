@@ -350,6 +350,6 @@ def spreads(request):
     }
 
     # QUERIES
-    spreads_queries(request, user, set_query, fetch_query, accounts)
+    spreads_queries(request, user, set_query, fetch_query)
 
     return renderTemplate_user(request, 'spreads', render)
