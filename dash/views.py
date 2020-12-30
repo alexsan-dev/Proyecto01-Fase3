@@ -7,6 +7,7 @@ from .queries.checks import *
 from .queries.signing import *
 from .queries.deposits import *
 from .queries.loans import *
+from .queries.cards import *
 
 # FORM MODELS
 from .forms import *
@@ -210,4 +211,20 @@ def loans(request):
 
 
 def cards(request):
-    return render_template(request, 'cards')
+    # FORMULARIO
+    users = fetch_query(f'SELECT * FROM SingleUser')
+    business = fetch_query(f'SELECT * FROM BusinessUser')
+    all_users = users + business
+
+    form = Cards_Form()
+
+    # VARIABLES
+    render = {
+        "form": form,
+        "users": all_users,
+    }
+
+    # QUERIES
+    cards_queries(request, fetch_query, set_query)
+
+    return render_template(request, 'cards', render)

@@ -35,3 +35,10 @@ class Charge_Change_Form(forms.ModelForm):
     class Meta:
         model = Accountcheck
         fields = ('name',)
+
+
+class Cards_Form(forms.ModelForm):
+
+    class Meta:
+        model = Cards
+        fields = ('id', 'credit')

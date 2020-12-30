@@ -12,30 +12,41 @@
   <body>
     <form method="POST">
       {% csrf_token %}
-      <h2>Agregar a chequera</h2>
-      <p>Llena el siguiente formulario para crear un nuevo cheque.</p>
+      <h2>Agregar tarjeta</h2>
+      <p>Llena el siguiente formulario para crear una nueva tarjeta.</p>
       <div class="inputGrid">
         <div class="inputRow">
-          {{form.amount}}
-          <label for="amount">Monto</label>
+          {{form.id}}
+          <label for="id">Id de tarjeta</label>
+          {% include "icons/hash.svg" %}
+        </div>
+        <div class="inputRow">
+          {{form.credit}}
+          <label for="credit">Credito</label>
           {% include "icons/dollar-sign.svg" %}
         </div>
         <div class="inputRow">
-          <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
-            <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
-            {% for account in accounts %}
-            <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+          <select name="brand" id="brand">
+            <option value="Prefepuntos">Prefepuntos</option>
+            <option value="Cashback">Cashback</option>
+          </select>
+          <label for="brand">Marca</label>
+          {% include "icons/book.svg" %}
+        </div>
+        <div class="inputRow">
+          <select name="user" id="user">
+            {% for user in users %}
+            <option value="{{user.0}}">{{user.0}}</option>
             {% endfor %}
           </select>
-
-          <label for="account">Cuenta</label>
-          {% include "icons/book-open.svg" %}
+          <label for="user">Usuario</label>
+          {% include "icons/user.svg" %}
         </div>
       </div>
 
       <div id="actions">
-        <button>
-          <span style="width: 100%; text-align: center">Agregar cheque</span>
+        <button style="width: 150px">
+          <span style="width: 100%; text-align: center">Agregar tarjeta</span>
         </button>
       </div>
     </form>

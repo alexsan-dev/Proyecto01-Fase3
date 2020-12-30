@@ -202,7 +202,9 @@ class Cards(models.Model):
     id = models.IntegerField(primary_key=True)
     brand = models.CharField(max_length=50, blank=True, null=True)
     # Field name made lowercase.
-    cashlimit = models.IntegerField(db_column='cashLimit')
+    credit = models.FloatField(db_column='credit')
+    lowlimit = models.FloatField(db_column='lowLimit')
+    highlimit = models.FloatField(db_column='highLimit')
     # Field name made lowercase.
     usercui = models.ForeignKey(
         'Singleuser', models.DO_NOTHING, db_column='userCui', blank=True, null=True)
