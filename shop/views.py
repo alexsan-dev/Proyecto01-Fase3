@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 
 # FORMULARIOS
 from .queries.login import *
+from .queries.store import *
+from .forms import *
 
 # MYSQL
 import MySQLdb
@@ -24,6 +26,13 @@ db = MySQLdb.connect(host=host, user=user, password=password,
 def renderTemplate(request, name, params={}):
     response = TemplateResponse(request, f'shop/{name}.html', params)
     return response
+
+
+def set_query(query):
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+    cursor.close()
 
 
 def get_user(request):
@@ -124,4 +133,22 @@ def login(request):
 
 
 def store(request):
-    return renderTemplate_user(request, 'store')
+    # TARJETAS
+    user = get_user(request)
+    userCui = user.get('cui', 0)
+    userBussines = user.get('comercialName', '')
+
+    cards = fetch_query(
+        f'SELECT * FROM Cards WHERE userCui = {userCui} OR userBusiness = "{userBussines}"')
+
+    # FORMULARIO
+    form = Purchases_Form()
+    render = {
+        "form": form,
+        "cards": cards
+    }
+
+    # QUERIES
+    store_queries(request, set_query, fetch_query)
+
+    return renderTemplate_user(request, 'store', render)

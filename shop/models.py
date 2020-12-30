@@ -230,10 +230,10 @@ class Cardtransaction(models.Model):
 
 class Purchases(models.Model):
     date = models.DateField()
-    description = models.CharField(max_length=50, blank=True, null=True)
+    description = models.TextField(max_length=50, blank=True, null=True)
     amount = models.FloatField()
     # Field name made lowercase.
-    isdollar = models.IntegerField(db_column='isDollar')
+    isdollar = models.BooleanField(db_column='isDollar')
     # Field name made lowercase.
     idcard = models.ForeignKey(Cards, models.DO_NOTHING, db_column='idCard')
 

@@ -20,16 +20,29 @@
           <label for="amount">Monto</label>
           {% include "icons/dollar-sign.svg" %}
         </div>
+        <div class="inputRow" style="margin: 60px 0">
+          {{form.description}}
+          <label for="description">Descripcion</label>
+        </div>
         <div class="inputRow">
-          <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
-            <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
-            {% for account in accounts %}
-            <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+          {{form.isdollar}}
+          <label for="description">Dollar <span>Moneda</span></label>
+        </div>
+        <div class="inputRow">
+          <input type="date" id="date" name="date" />
+          <label for="date">Fecha:</label>
+          {% include "icons/calendar.svg" %}
+        </div>
+        <div class="inputRow">
+          <select id="card" name="card" autocomplete="off" required aria-placeholder="Seleccionar tarjeta">
+            <option hidden selected disabled value="Seleccionar tarjeta">Seleccionar tarjeta</option>
+            {% for card in cards %}
+            <option value="{{card.0}}">{{card.0}} {{card.1}}</option>
             {% endfor %}
           </select>
 
-          <label for="account">Cuenta</label>
-          {% include "icons/book-open.svg" %}
+          <label for="card">Tarjeta</label>
+          {% include "icons/credit-card.svg" %}
         </div>
       </div>
 

@@ -27,6 +27,7 @@
         </div>
         <div class="inputRow">
           <select name="brand" id="brand">
+            <option value="Seleccionar Marca" selected disabled>Seleccionar Marca</option>
             <option value="Prefepuntos">Prefepuntos</option>
             <option value="Cashback">Cashback</option>
           </select>
@@ -35,6 +36,7 @@
         </div>
         <div class="inputRow">
           <select name="user" id="user">
+            <option value="Seleccionar usuario" selected disabled>Seleccionar usuario</option>
             {% for user in users %}
             <option value="{{user.0}}">{{user.0}}</option>
             {% endfor %}
