@@ -217,6 +217,31 @@ class Cards(models.Model):
         db_table = 'Cards'
 
 
+class Cardtransaction(models.Model):
+    purchase = models.ForeignKey(
+        'Purchases', models.DO_NOTHING, db_column='purchase')
+    prefepoints = models.FloatField()
+    cashback = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'CardTransaction'
+
+
+class Purchases(models.Model):
+    date = models.DateField()
+    description = models.CharField(max_length=50, blank=True, null=True)
+    amount = models.FloatField()
+    # Field name made lowercase.
+    isdollar = models.IntegerField(db_column='isDollar')
+    # Field name made lowercase.
+    idcard = models.ForeignKey(Cards, models.DO_NOTHING, db_column='idCard')
+
+    class Meta:
+        managed = False
+        db_table = 'Purchases'
+
+
 class Thirdaccount(models.Model):
     id = models.CharField(primary_key=True, max_length=6)
     # Field name made lowercase.

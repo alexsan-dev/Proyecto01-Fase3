@@ -1,0 +1,54 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión | Compra en linea</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <form method="POST">
+      {% csrf_token %}
+      <h2>Iniciar sesión</h2>
+      <p>Si ya tienes una cuenta en la banca en línea puedes iniciar aquí.</p>
+      <div class="inputRow">
+        <input
+          type="username"
+          id="username"
+          name="username"
+          autocomplete="off"
+          placeholder="Nuevo usuario"
+          oninvalid="this.setCustomValidity('Ingresa un nombre valido')"
+          oninput="this.setCustomValidity('')"
+          required
+        />
+        <label for="email">Nombre de usuario</label>
+        {% include "icons/user.svg" %}
+      </div>
+      <div class="inputRow">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          autocomplete="off"
+          placeholder="Contraseña segura"
+          oninvalid="this.setCustomValidity('La contraseña es obligatoria')"
+          oninput="this.setCustomValidity('')"
+          onfocus="this.type='text'"
+          onblur="this.type='password'"
+          required
+        />
+        <label for="password">Contraseña</label>
+        {% include "icons/lock.svg" %}
+      </div>
+      <div id="actions">
+        <button>
+          <span style="width: 100%; text-align: center">Iniciar sesión</span>
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

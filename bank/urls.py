@@ -27,4 +27,5 @@ urlpatterns = [
             url=staticfiles_storage.url("/images/favicon.ico")),
     ),
     path('admin/', include('dash.urls')),
+    path('shop/', include('shop.urls'))
 ]
