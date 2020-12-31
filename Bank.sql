@@ -215,15 +215,6 @@ CREATE TABLE Cards (
     foreign key (userBusiness) references BusinessUser (comercialName)
 );
 
-DROP TABLE IF EXISTS CardTransaction;
-CREATE TABLE CardTransaction (
-	id int primary key auto_increment,
-	purchase int not null,
-    prefepoints float not null,
-    cashback float not null,
-    foreign key (purchase) references Purchases (id)
-);
-
 DROP TABLE IF EXISTS Purchases;
 CREATE TABLE Purchases (
 	id  int primary key auto_increment,
@@ -234,3 +225,13 @@ CREATE TABLE Purchases (
     idCard int not null,
 	foreign key (idCard) references Cards (id)
 ); 
+
+DROP TABLE IF EXISTS CardTransaction;
+CREATE TABLE CardTransaction (
+	id int primary key auto_increment,
+	purchase int not null,
+    prefepoints float not null,
+    cashback float not null,
+    foreign key (purchase) references Purchases (id)
+);
+
