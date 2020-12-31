@@ -8,6 +8,7 @@ from .queries.transactions import *
 from .queries.accounts import *
 from .queries.checks import *
 from .queries.spreads import *
+from .queries.cards import *
 from .queries.loans import *
 
 # FORM MODELS
@@ -353,3 +354,20 @@ def spreads(request):
     spreads_queries(request, user, set_query, fetch_query)
 
     return renderTemplate_user(request, 'spreads', render)
+
+
+def cards(request):
+    user = get_user(request)
+    userCui = user.get('cui', 0)
+    userBusiness = user.get('comercialName', '')
+    cards = fetch_query(
+        f'SELECT * FROM Cards WHERE userCui = {userCui} OR userBusiness = "{userBusiness}"')
+
+    render = {
+        "cards": cards
+    }
+
+    if request.method == 'POST':
+        render = cards_queries(request, fetch_query, render)
+
+    return renderTemplate_user(request, 'cards', render)

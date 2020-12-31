@@ -13,5 +13,6 @@ urlpatterns = [
     path('checks/', views.checks, name='checks'),
     path('loans/', views.loans, name='loans'),
     path('states/', views.states, name='states'),
-    path('spreads/', views.spreads, name='spreads')
+    path('spreads/', views.spreads, name='spreads'),
+    path('cards/', views.cards, name='cards')
 ]

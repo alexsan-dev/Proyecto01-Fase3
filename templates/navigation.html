@@ -9,21 +9,15 @@
       <div id="profileContainer">
         <h1>{{name}}</h1>
         <p>+502-{{phone}}</p>
-        <a href="/login" title="Cerrar sesión" class="button" style="margin-top: 10px"
-          >Cerrar sesión</a
-        >
+        <a href="/login" title="Cerrar sesión" class="button" style="margin-top: 10px">Cerrar sesión</a>
       </div>
       <hr />
       <ul>
         <li>
-          <a href="{% url 'accounts' %} " id="accounts"
-            >{% include "icons/info.svg" %} <span>Cuentas</span></a
-          >
+          <a href="{% url 'accounts' %} " id="accounts">{% include "icons/info.svg" %} <span>Cuentas</span></a>
         </li>
         <li>
-          <a href="#" id="transactions"
-            >{% include "icons/repeat.svg" %} <span>Transacciones</span>
-          </a>
+          <a href="#" id="transactions">{% include "icons/repeat.svg" %} <span>Transacciones</span> </a>
           <ul>
             <li>
               <a href="{% url 'own_transactions' %}" id="own_transactions"
@@ -41,9 +35,7 @@
           <a href="#" id="payments">{% include "icons/dollar-sign.svg" %} <span>Pagos</span></a>
           <ul>
             <li>
-              <a href="{% url 'payments' %}" id="admin"
-                >{% include "icons/home.svg" %} <span>Servicios</span></a
-              >
+              <a href="{% url 'payments' %}" id="admin">{% include "icons/home.svg" %} <span>Servicios</span></a>
             </li>
             <li>
               <a href="{% url 'spreads' %}" id="admin"
@@ -53,18 +45,14 @@
           </ul>
         </li>
         <li>
-          <a href="{% url 'checks' %}" id="checks"
-            >{% include "icons/check-square.svg" %} <span>Cheques</span></a
-          >
+          <a href="{% url 'checks' %}" id="checks">{% include "icons/check-square.svg" %} <span>Cheques</span></a>
         </li>
         <li>
-          <a href="{% url 'loans' %}" id="loans"
-            >{% include "icons/book-open.svg" %} <span>Prestamos</span></a
-          >
+          <a href="{% url 'loans' %}" id="loans">{% include "icons/book-open.svg" %} <span>Prestamos</span></a>
         </li>
         <li>
-          <a href="{% url 'states' %}" id="states"
-            >{% include "icons/align-left.svg" %} <span>Estados de cuenta</span></a
+          <a href="{% url 'cards' %}" id="states"
+            >{% include "icons/align-left.svg" %} <span>Saldos de tarjeta</span></a
           >
         </li>
       </ul>

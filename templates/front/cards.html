@@ -1,0 +1,112 @@
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estados de cuenta | Banca Virtual</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <style>
+    #check_enable ~ #enable_check {
+      display: none;
+    }
+
+    #check_enable ~ #disable_check {
+      display: flex;
+    }
+
+    #check_enable:checked ~ #enable_check {
+      display: flex;
+    }
+
+    #check_enable:checked ~ #disable_check {
+      display: none;
+    }
+  </style>
+  <body>
+    {% include "navigation.html" %}
+    <main>
+      <form method="POST" class="title" style="height: 30%;">
+      {% csrf_token %}
+        <div class="description" style="margin-top: -15px;">
+          <h1>Saldos de tarjetas</h1>
+          <p>
+            Aquí se mostraran los estados de cuenta de todas tus cuentas asociadas.
+            <div class="inputRow" style="position: relative;top: 30px;">
+                <select
+                    id="card"
+                    name='card'
+                    autocomplete="off"
+                    required
+                    aria-placeholder="Seleccionar tarjeta"
+                >
+                    <option hidden selected disabled value="Seleccionar tarjeta">
+                    Seleccionar tarjeta
+                    </option>
+                    {% for card in cards %}
+                    <option value="{{card.0}}">{{card.0}} {{card.1}}</option>
+                    {% endfor %}
+                </select>
+                <label for="card">Seleccionar tarjeta</label>
+                {% include "icons/credit-card.svg" %}
+            </div>
+          </p>
+          <button style='margin-top: 20px;margin-bottom: -60px'>Ver saldos</button>
+        </div>
+      </form>
+      <div class="container" style="height: 70%;width:100%">
+        <!-- CUENTAS MONETARIAS -->
+        <div class="accounts" style="width:100%">
+          <div class="account_container">
+            <h2>Historial <strong>tarjetas:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>No tarjeta</strong>
+                <strong>Marca</strong>
+                <strong>Credito</strong>
+                <strong>Debito</strong>
+                <strong>Cuenta</strong>
+              </li>
+              <li>
+                 <p>{{cardsData.0}}</p>
+                  <p>{{cardsData.1}}</p>
+                  <p>{{cardsData.2|floatformat:2}}</p>
+                  <p>{{cardsData.3|floatformat:2}}</p>
+                  <p>{{cardsData.8}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="account_container">
+            <h2>Historial <strong>compras:</strong></h2>
+
+            <ul class="accounts_table">
+              <li>
+                <strong>Id</strong>
+                <strong style='width:250px'>Fecha</strong>
+                <strong style='width:200px'>Descripcion</strong>
+                <strong >Monto</strong>
+                <strong style='width:150px'>Prefepuntos</strong>
+                <strong>Cashback</strong>
+              </li>
+              {% for pur in purchases %}
+              <li>
+                 <p>{{pur.0}}</p>
+                  <p style='width:250px'>{{pur.1}}</p>
+                  <p style='width:200px'>{{pur.2}}</p>
+                  <p>{{pur.3|floatformat:2}}</p>
+                  <p style='width:150px'>{{pur.8|floatformat:2}}</p>
+                  <p>{{pur.9|floatformat:2}}</p>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </body>
+</html>
