@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS SpreadsPay;
 CREATE TABLE SpreadsPay (
 	id int primary key auto_increment,
     payAccount varchar(6) not null,
-    payName varchar(20) not null,
+    payName varchar(50) not null,
     amount float null,
     isMensualPayPlan boolean not null,
     userBusiness varchar(50) null,
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS ProvidersPay;
 CREATE TABLE ProvidersPay (
 	id int primary key auto_increment,
     payAccount varchar(6) not null,
-    payName varchar(20) not null,
+    payName varchar(50) not null,
     amount float null,
     isMensualPayPlan boolean not null,
     userBusiness varchar(50) null,

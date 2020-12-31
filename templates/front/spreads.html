@@ -23,7 +23,7 @@
               <button onclick="confirmPassword()">{% include "icons/dollar-sign.svg" %} Realizar pago</button>
             </p>
           </div>
-          <div class="payments_accounts" method="POST">
+          <div class="payments_accounts">
             {% csrf_token %}
             <div class="inputRow">
               <select
@@ -76,6 +76,17 @@
           style="position: absolute; width: 230px; right: 20px; bottom: -35px"
         >
           {% csrf_token %}
+          <div class="inputRow" style="position: absolute; width: 230px; right: 0px; bottom: -85px">
+            <select id="account" name="account" autocomplete="off" required aria-placeholder="Seleccionar cuenta">
+              <option hidden selected disabled value="Seleccionar cuenta">Seleccionar cuenta</option>
+              {% for account in accounts %}
+              <option value="{{account.id}}">{{account.id}} {{account.type}}</option>
+              {% endfor %}
+            </select>
+
+            <label for="account">Cuenta a debitar</label>
+            {% include "icons/user.svg" %}
+          </div>
           <div class="inputRow">
             <input
               type="file"

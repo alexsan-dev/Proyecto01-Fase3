@@ -35,6 +35,8 @@ def spreads_queries(request, user, set_query, fetch_query):
                     def debit_from():
                         set_query(
                             f'UPDATE Account SET debit = debit + {amount} WHERE id = {req_account}')
+                        set_query(
+                            f'UPDATE Account SET credit = {amount} WHERE id = {payAccount}')
 
                     if prevPay and prevPay[0]:
                         # UPDATE
@@ -65,6 +67,7 @@ def spreads_queries(request, user, set_query, fetch_query):
                     file_payAccount = cols[0]
                     file_payName = cols[1]
                     file_amount = cols[2]
+                    print(cols)
 
                     # ACTUALIZAR
                     insert_pay(account, 1, file_amount,
