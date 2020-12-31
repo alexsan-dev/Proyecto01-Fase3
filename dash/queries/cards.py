@@ -42,6 +42,7 @@ def cards_queries(request, fetch_query, set_query):
             # VARIABLES
             card_id = data.get('id', '')
             credit = data.get('credit', 0)
+            account = request.POST.get('account')
             brand = request.POST.get('brand', 'Prefepuntos')
             user_id = request.POST.get('user', 0)
             userCui = int(user_id) if user_id.isdigit() else 0
@@ -60,7 +61,8 @@ def cards_queries(request, fetch_query, set_query):
             # INSERT
             if float(credit) >= limit[0] and float(credit) <= limit[1]:
                 if len(cards) <= 2:
+                    userCui = int(user_id) if not isBusiness else "null"
                     userBusiness = f'"{user_id}"' if isBusiness else "null"
 
                     set_query(
-                        f'INSERT INTO Cards VALUES ({card_id}, "{brand}", {credit}, 0, {limit[0]}, {limit[1]}, {userCui}, {userBusiness})')
+                        f'INSERT INTO Cards VALUES ({card_id}, "{brand}", {credit}, 0, {limit[0]}, {limit[1]}, {userCui}, {userBusiness}, {account})')

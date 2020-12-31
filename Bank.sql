@@ -106,6 +106,48 @@ CREATE TABLE Transactions (
 	foreign key (originAccount) references Account (id)
 );
 
+# PAGOS DE PLANILLAS
+DROP TABLE IF EXISTS SpreadsPay;
+CREATE TABLE SpreadsPay (
+	id int primary key auto_increment,
+    employAccount varchar(6) not null,
+    employName varchar(20) not null,
+    amount float null,
+    isMensualPayPlan boolean not null,
+    userBusiness varchar(50) null,
+    account varchar(6) not null,
+    foreign key (userBusiness) references BusinessUser (comercialName),
+    foreign key (account) references Account (id)
+);
+
+# PAGO DE PLANILLAS
+DROP TABLE IF EXISTS SpreadsPay;
+CREATE TABLE SpreadsPay (
+	id int primary key auto_increment,
+    payAccount varchar(6) not null,
+    payName varchar(20) not null,
+    amount float null,
+    isMensualPayPlan boolean not null,
+    userBusiness varchar(50) null,
+    account varchar(6) not null,
+    foreign key (userBusiness) references BusinessUser (comercialName),
+    foreign key (account) references Account (id)
+);
+
+# PAGO DE PROVEEDORES
+DROP TABLE IF EXISTS ProvidersPay;
+CREATE TABLE ProvidersPay (
+	id int primary key auto_increment,
+    payAccount varchar(6) not null,
+    payName varchar(20) not null,
+    amount float null,
+    isMensualPayPlan boolean not null,
+    userBusiness varchar(50) null,
+    account varchar(6) not null,
+    foreign key (userBusiness) references BusinessUser (comercialName),
+    foreign key (account) references Account (id)
+);
+
 # CHEQUES
 DROP TABLE IF EXISTS AccountCheck;
 CREATE TABLE AccountCheck (
@@ -127,4 +169,68 @@ CREATE TABLE AuthCheck (
     foreign key (id) references AccountCheck (id)
 );
 
+# PESTAMOS
+DROP TABLE IF EXISTS Loans;
+CREATE TABLE Loans (
+	id int primary key auto_increment,
+    amount float not null,
+    plan int not null,
+    interest int not null,
+    description varchar(50) not null,
+    canceledQuotas int not null,
+    authorized boolean not null,
+	userCui bigint null,
+    userBusiness varchar(50) null,
+    foreign key (userCui) references SingleUser (cui),
+    foreign key (userBusiness) references BusinessUser (comercialName)
+);
 
+# CUOTA
+DROP TABLE IF EXISTS LoanQuotas;
+CREATE TABLE LoanQuotas (
+	id int primary key auto_increment,
+    loan int not null,
+    date Date not null,
+    payDate Date null,
+	amount float null,
+    account varchar(6) null,
+	foreign key (account) references Account (id),
+    foreign key (loan) references Loans (id)
+);
+
+# TARJETAS
+DROP TABLE IF EXISTS Cards;
+CREATE TABLE Cards (
+	id int primary key, 
+	brand varchar(50),
+    credit float not null,
+    debit float not null,
+    lowLimit float not null,
+	highLimit float not null,
+	userCui bigint null,
+	userBusiness varchar(50) null,
+    account varchar(6) not null,
+    foreign key (userCui) references SingleUser (cui),
+    foreign key (account) references Account (id),
+    foreign key (userBusiness) references BusinessUser (comercialName)
+);
+
+DROP TABLE IF EXISTS CardTransaction;
+CREATE TABLE CardTransaction (
+	id int primary key auto_increment,
+	purchase int not null,
+    prefepoints float not null,
+    cashback float not null,
+    foreign key (purchase) references Purchases (id)
+);
+
+DROP TABLE IF EXISTS Purchases;
+CREATE TABLE Purchases (
+	id  int primary key auto_increment,
+    date date not null,
+    description varchar(50) null,
+    amount float not null,
+    isDollar boolean not null,
+    idCard int not null,
+	foreign key (idCard) references Cards (id)
+); 

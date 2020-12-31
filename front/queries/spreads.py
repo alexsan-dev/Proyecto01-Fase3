@@ -62,8 +62,8 @@ def spreads_queries(request, user, set_query, fetch_query):
                 cols = row.split(',')
 
                 if col_counter > 0:
-                    file_payName = cols[0]
-                    file_payAccount = cols[1]
+                    file_payAccount = cols[0]
+                    file_payName = cols[1]
                     file_amount = cols[2]
 
                     # ACTUALIZAR

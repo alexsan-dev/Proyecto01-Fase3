@@ -214,6 +214,9 @@ def cards(request):
     # FORMULARIO
     users = fetch_query(f'SELECT * FROM SingleUser')
     business = fetch_query(f'SELECT * FROM BusinessUser')
+    accounts = fetch_query(
+        f'SELECT * FROM Account LEFT JOIN AccountType ON Account.id = AccountType.id WHERE AccountType.monetary IS NOT NULL')
+
     all_users = users + business
 
     form = Cards_Form()
@@ -222,6 +225,7 @@ def cards(request):
     render = {
         "form": form,
         "users": all_users,
+        "accounts": accounts
     }
 
     # QUERIES

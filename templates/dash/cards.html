@@ -44,6 +44,16 @@
           <label for="user">Usuario</label>
           {% include "icons/user.svg" %}
         </div>
+        <div class="inputRow">
+          <select name="account" id="account">
+            <option value="Seleccionar cuenta" selected disabled>Seleccionar cuenta</option>
+            {% for account in accounts %}
+            <option value="{{account.0}}">{{account.0}} Monetaria</option>
+            {% endfor %}
+          </select>
+          <label for="account">Cuenta</label>
+          {% include "icons/book-open.svg" %}
+        </div>
       </div>
 
       <div id="actions">
