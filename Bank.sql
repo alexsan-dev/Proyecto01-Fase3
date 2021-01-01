@@ -106,19 +106,6 @@ CREATE TABLE Transactions (
 	foreign key (originAccount) references Account (id)
 );
 
-# PAGOS DE PLANILLAS
-DROP TABLE IF EXISTS SpreadsPay;
-CREATE TABLE SpreadsPay (
-	id int primary key auto_increment,
-    employAccount varchar(6) not null,
-    employName varchar(20) not null,
-    amount float null,
-    isMensualPayPlan boolean not null,
-    userBusiness varchar(50) null,
-    account varchar(6) not null,
-    foreign key (userBusiness) references BusinessUser (comercialName),
-    foreign key (account) references Account (id)
-);
 
 # PAGO DE PLANILLAS
 DROP TABLE IF EXISTS SpreadsPay;
