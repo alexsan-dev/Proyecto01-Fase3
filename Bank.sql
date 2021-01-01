@@ -106,7 +106,6 @@ CREATE TABLE Transactions (
 	foreign key (originAccount) references Account (id)
 );
 
-
 # PAGO DE PLANILLAS
 DROP TABLE IF EXISTS SpreadsPay;
 CREATE TABLE SpreadsPay (
@@ -226,10 +225,15 @@ CREATE TABLE CardTransaction (
 INSERT INTO SingleUser VALUES (1111111111111, 123456789012, "Empleado", "2001/05/13", "employ", "123",35678555 );
 INSERT INTO SingleUser VALUES (2222222222222, 123456789012, "Empleado2", "2001/05/13", "employ2", "123",35678555 );
 INSERT INTO BusinessUser VALUES ("empresa", "Sociedad Anonima", "Mi Empresa", "Alex Santos", "123",35678555 );
+INSERT INTO BusinessUser VALUES ("empresa2", "Sociedad Anonima", "Otra Empresa", "Alex Santos", "123",35678555 );
 
 INSERT into MonetaryAccount values (333333, "Cuenta empresarial");
 INSERT into AccountType(id, monetary) values (333333, 333333);
-INSERT into Account values (333333,0,0,1,0, 0,0,null, "empresa", 15, 0);
+INSERT into Account values (333333,0,0,0,100000000000, 0,0,null, "empresa", 15, 0);
+
+INSERT into MonetaryAccount values (111111, "Cuenta empresarial");
+INSERT into AccountType(id, monetary) values (111111, 111111);
+INSERT into Account values (111111,0,0,0,0, 0,0,null, "empresa2", 15, 0);
 
 INSERT into MonetaryAccount values (541234, "Cuenta 1");
 INSERT into AccountType(id, monetary) values (541234, 541234);
