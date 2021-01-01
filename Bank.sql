@@ -235,3 +235,47 @@ CREATE TABLE CardTransaction (
     foreign key (purchase) references Purchases (id)
 );
 
+# USUARIOS
+INSERT INTO SingleUser VALUES (1111111111111, 123456789012, "Empleado", "2001/05/13", "employ", "123",35678555 );
+
+INSERT into MonetaryAccount values (541234, "Cuenta 1");
+INSERT into AccountType(id, monetary) values (541234, 541234);
+INSERT into Account values (541234,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (263769, "Cuenta 2");
+INSERT into AccountType(id, monetary) values (263769, 263769);
+INSERT into Account values (263769,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (481366, "Cuenta 3");
+INSERT into AccountType(id, monetary) values (481366, 481366);
+INSERT into Account values (481366,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (152352, "Cuenta 4");
+INSERT into AccountType(id, monetary) values (152352, 152352);
+INSERT into Account values (152352,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (358054, "Cuenta 5");
+INSERT into AccountType(id, monetary) values (358054, 358054);
+INSERT into Account values (358054,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (503944, "Cuenta 6");
+INSERT into AccountType(id, monetary) values (503944, 503944);
+INSERT into Account values (503944,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (316167, "Cuenta 7");
+INSERT into AccountType(id, monetary) values (316167, 316167);
+INSERT into Account values (316167,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (374296, "Cuenta 8");
+INSERT into AccountType(id, monetary) values (374296, 374296);
+INSERT into Account values (374296,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (556658, "Cuenta 9");
+INSERT into AccountType(id, monetary) values (556658, 556658);
+INSERT into Account values (556658,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+INSERT into MonetaryAccount values (462978, "Cuenta 10");
+INSERT into AccountType(id, monetary) values (462978, 462978);
+INSERT into Account values (462978,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+
+select * from Account;
