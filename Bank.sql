@@ -237,6 +237,12 @@ CREATE TABLE CardTransaction (
 
 # USUARIOS
 INSERT INTO SingleUser VALUES (1111111111111, 123456789012, "Empleado", "2001/05/13", "employ", "123",35678555 );
+INSERT INTO SingleUser VALUES (2222222222222, 123456789012, "Empleado2", "2001/05/13", "employ2", "123",35678555 );
+INSERT INTO BusinessUser VALUES ("empresa", "Sociedad Anonima", "Mi Empresa", "Alex Santos", "123",35678555 );
+
+INSERT into MonetaryAccount values (333333, "Cuenta empresarial");
+INSERT into AccountType(id, monetary) values (333333, 333333);
+INSERT into Account values (333333,0,0,1,0, 0,0,null, "empresa", 15, 0);
 
 INSERT into MonetaryAccount values (541234, "Cuenta 1");
 INSERT into AccountType(id, monetary) values (541234, 541234);
@@ -260,22 +266,22 @@ INSERT into Account values (358054,0,0,1,0, 0,0,1111111111111, null, 15, 0);
 
 INSERT into MonetaryAccount values (503944, "Cuenta 6");
 INSERT into AccountType(id, monetary) values (503944, 503944);
-INSERT into Account values (503944,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+INSERT into Account values (503944,0,0,1,0, 0,0,2222222222222, null, 15, 0);
 
 INSERT into MonetaryAccount values (316167, "Cuenta 7");
 INSERT into AccountType(id, monetary) values (316167, 316167);
-INSERT into Account values (316167,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+INSERT into Account values (316167,0,0,1,0, 0,0,2222222222222, null, 15, 0);
 
 INSERT into MonetaryAccount values (374296, "Cuenta 8");
 INSERT into AccountType(id, monetary) values (374296, 374296);
-INSERT into Account values (374296,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+INSERT into Account values (374296,0,0,1,0, 0,0,2222222222222, null, 15, 0);
 
 INSERT into MonetaryAccount values (556658, "Cuenta 9");
 INSERT into AccountType(id, monetary) values (556658, 556658);
-INSERT into Account values (556658,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+INSERT into Account values (556658,0,0,1,0, 0,0,2222222222222, null, 15, 0);
 
 INSERT into MonetaryAccount values (462978, "Cuenta 10");
 INSERT into AccountType(id, monetary) values (462978, 462978);
-INSERT into Account values (462978,0,0,1,0, 0,0,1111111111111, null, 15, 0);
+INSERT into Account values (462978,0,0,1,0, 0,0,2222222222222, null, 15, 0);
 
 select * from Account;
